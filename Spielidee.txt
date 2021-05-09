@@ -1,0 +1,14 @@
+Top-Down-Shooter in 2D-Grafik mit online Multiplayer
+Man kann nach Spielstart auswählen  ob man einem Spiel beitreten oder eines hosten möchte.
+Wenn man ein Spiel hostet können andere Spieler einem beitreten,
+wenn alle bereit sind zu starten, kann der Host die  Runde starten.
+
+Die Spieler kämpfen in einer zufälligen Arena. In der Arena spawnen kleine bis mittelgroße Monster.
+Die Spieler können zusammen gegen die Monster kämpfen,oder sich um den Loot der Monster prügeln.
+Die Monster lassen unterschiedlich starke Waffen fallen, je nachdem wie stark das Monster ist.
+Die spieler können beliebig oft respawnen, wer nach ablauf der Zeit mehr Spieler-Kills hat gewinnt.
+Bei Gleichstand gewinnt der Spieler mit den meisten Monster-Kills.
+
+Gesteuert wird mit wasd oder pfeiltasten, die Waffe wird mit dem Cursor gezielt.
+Linke Maustaste schießt, rechte Maustaste bietet Waffenabhängige 
+Spezialmoves. Auf Leertaste liegt ein Ausweichmanöver.
