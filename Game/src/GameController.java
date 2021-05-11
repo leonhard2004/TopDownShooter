@@ -9,6 +9,12 @@ public class GameController {
     private static ArrayList<CollisionCircle> CollisionCircles = new ArrayList<CollisionCircle>();
     //Liste mit Projektilen
     private static ArrayList<Projektil> Projektile = new ArrayList<Projektil>();
+    //Liste mit Spielern
+    private static ArrayList<Spieler> SpielerListe = new ArrayList<Spieler>();
+    //Liste mit Gegnern
+    private static ArrayList<Gegner> Gegner = new ArrayList<Gegner>();
+    //Liste mit Wänden
+    private static ArrayList<Wand> Waende = new ArrayList<Wand>();
     private static GameController main = new GameController();
     private static GUI gui = new GUI();
     public static void main(String[] args) {
@@ -21,19 +27,13 @@ public class GameController {
         spieler1input.setMeinSpieler(spieler1);
         gui.SpielerHinzufuegen(spieler1);
         CollisionBoxes.add(spieler1.getCollisionBox());
+        SpielerListe.add(spieler1);
 
-        //Wand erstellen
-        Wand wand1 = new Wand(1000, 60, new Color(104, 104, 104), new Point2D.Double(128,128));
-        CollisionBoxes.add(wand1.getCollisionBox());
-        gui.WandHinzufuegen(wand1);
-        //Wand erstellen
-        Wand wand2 = new Wand(1000, 60, new Color(104, 104, 104), new Point2D.Double(128,600));
-        CollisionBoxes.add(wand2.getCollisionBox());
-        gui.WandHinzufuegen(wand2);
-        //Wand erstellen
-        Wand wand3 = new Wand(60, 1000, new Color(104, 104, 104), new Point2D.Double(128,120));
-        CollisionBoxes.add(wand3.getCollisionBox());
-        gui.WandHinzufuegen(wand3);
+        main.WandErstellen(1000, 60, new Color(104, 104, 104), new Point2D.Double(128,600));
+        main.WandErstellen(60, 1000, new Color(104, 104, 104), new Point2D.Double(128,120));
+
+        //Gegner erstellen
+        main.GegnerErstellen(new Point2D.Double(300,300), 40, 40, 100, new Color(255, 132, 0));
 
         //Projektil erstellen
         //Projektil proj1 = new Projektil(30, new Point2D.Double(500, 500), new Color(255, 0, 0), 5, main);
@@ -69,17 +69,23 @@ public class GameController {
                 }
                 for (int j = 0; j < CollisionCircles.size(); j++) {
                     if(CollisionBoxes.get(i).CollidesWith(CollisionCircles.get(j))){
-                        //System.out.println(CollisionBoxes.get(i).getTag() + " ist mit " + CollisionCircles.get(j).getTag() + " kollidiert");
+                        if (CollisionCircles.get(j).getMeinProjektil() != null) {
+                            CollisionCircles.get(j).getMeinProjektil().OnCollision(CollisionBoxes.get(i));
+                        }
                         if(CollisionBoxes.get(i).getSpieler() != null){
                             CollisionBoxes.get(i).getSpieler().OnCollision(CollisionCircles.get(j));
                         }
-                        if(CollisionCircles.get(j).getMeinProjektil() != null){
-                            CollisionCircles.get(j).getMeinProjektil().OnCollision(CollisionBoxes.get(i));
+                        if(CollisionBoxes.get(i).getmeinGegner() != null){
+                            CollisionBoxes.get(i).getmeinGegner().OnCollision(CollisionCircles.get(j));
                         }
+
+
+
 
                     }
                 }
             }
+
 
             //Szene malen
             gui.malen();
@@ -89,19 +95,30 @@ public class GameController {
     public void ProjektilHinzufügen(Projektil projektil){
         Projektile.add(projektil);
         CollisionCircles.add(projektil.getCollisionCircle());
-        gui.ProjektiilHinzufügen(projektil);
+        gui.ProjektilHinzufügen(projektil);
     }
-    public void Projektillöschen(Projektil projektil){
+    public void ProjektilLöschen(Projektil projektil){
         CollisionCircles.remove(projektil.getCollisionCircle());
-        gui.Projektile.remove(projektil);
+        gui.getProjektile().remove(projektil);
         Projektile.remove(projektil);
     }
-    public Point2D.Double MoveInDirection(double distanz,double richtung, double steigung, Point2D.Double startpostion){
-        Point2D.Double endposition = new Point2D.Double(0,0);
-        double deltaX = Math.sqrt((Math.pow(distanz, 2) / (1+steigung)));
-        double deltaY = steigung * deltaX;
-        endposition.x = startpostion.x + richtung * deltaX;
-        endposition.y = startpostion.y + deltaY;
-        return  endposition;
+
+    public void WandErstellen(int breite, int hoehe, Color farbe, Point2D.Double position){
+        Wand wand = new Wand(breite, hoehe, farbe, position);
+        Waende.add(wand);
+        CollisionBoxes.add(wand.getCollisionBox());
+        gui.WandHinzufuegen(wand);
+    }
+    public void GegnerErstellen(Point2D.Double position, int breite, int hoehe, int maxLeben, Color farbe){
+        Gegner gegner = new Gegner(position, breite, hoehe, farbe, maxLeben, main);
+        Gegner.add(gegner);
+        CollisionBoxes.add(gegner.getCollisionBox());
+        gui.GegnerHinzufuegen(gegner);
+    }
+
+    public void GegnerLoeschen(Gegner gegner){
+        CollisionBoxes.remove(gegner.getCollisionBox());
+        gui.getGegner().remove(gegner);
+        Gegner.remove(gegner);
     }
 }
