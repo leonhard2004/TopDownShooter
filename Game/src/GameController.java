@@ -3,13 +3,18 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class GameController {
-    //Liste mit Spielern
-    private ArrayList<Spieler> spieler = new ArrayList<Spieler>();
     //Liste mit Kollisionsrechtecken
-    private  ArrayList<CollisionBox> collisionBoxes = new ArrayList<CollisionBox>();
+    private static ArrayList<CollisionBox> CollisionBoxes = new ArrayList<CollisionBox>();
     //Liste mit Kollisionskreisen
-    private  ArrayList<CollisionCircle> collisionCircles = new ArrayList<CollisionCircle>();
+    private static ArrayList<CollisionCircle> CollisionCircles = new ArrayList<CollisionCircle>();
     //Liste mit Projektilen
+    private static ArrayList<Projektil> Projektile = new ArrayList<Projektil>();
+    //Liste mit Spielern
+    private static ArrayList<Spieler> SpielerListe = new ArrayList<Spieler>();
+    //Liste mit Gegnern
+    private static ArrayList<Gegner> Gegner = new ArrayList<Gegner>();
+    //Liste mit Wänden
+    private static ArrayList<Wand> Waende = new ArrayList<Wand>();
     private  ArrayList<Projektil> projektile = new ArrayList<Projektil>();
     private GameController main = this;
     private  GUI gui = new GUI();
@@ -21,23 +26,17 @@ public class GameController {
         InputController spieler1input = new InputController(gui);
         Spieler spieler1 = new Spieler(gui, 1000, 400, 60, 60, new Color(0, 72, 255), spieler1input, main);
         spieler1input.setMeinSpieler(spieler1);
-        spieler.add(spieler1);
         gui.SpielerHinzufuegen(spieler1);
-        collisionBoxes.add(spieler1.getCollisionBox());
+        CollisionBoxes.add(spieler1.getCollisionBox());
+        SpielerListe.add(spieler1);
 
-        //Wand erstellen
-        Wand wand1 = new Wand(1000, 60, new Color(104, 104, 104), new Point2D.Double(128, 128));
-        collisionBoxes.add(wand1.getCollisionBox());
-        gui.WandHinzufuegen(wand1);
-        //Wand erstellen
-        Wand wand2 = new Wand(1000, 60, new Color(104, 104, 104), new Point2D.Double(128, 600));
-        collisionBoxes.add(wand2.getCollisionBox());
-        gui.WandHinzufuegen(wand2);
-        //Wand erstellen
-        Wand wand3 = new Wand(60, 1000, new Color(104, 104, 104), new Point2D.Double(128, 120));
-        collisionBoxes.add(wand3.getCollisionBox());
-        gui.WandHinzufuegen(wand3);
-    }
+        main.WandErstellen(1000, 60, new Color(104, 104, 104), new Point2D.Double(128,600));
+        main.WandErstellen(60, 1000, new Color(104, 104, 104), new Point2D.Double(128,120));
+
+        //Gegner erstellen
+        main.GegnerErstellen(new Point2D.Double(300,300), 40, 40, 100, new Color(255, 132, 0));
+
+
 
     public void FixedUpdate() {
         //Spieler bewegen
@@ -48,53 +47,71 @@ public class GameController {
         for (int i = 0; i < projektile.size(); i++) {
             projektile.get(i).move();
             }
-        //Koliisionen überprüfen
-        for (int i = 0; i < collisionBoxes.size(); i++) {
-            for (int j = i + 1; j < collisionBoxes.size(); j++) {
-                //System.out.println("i: "+Collider.get(i).getTag());
-                //System.out.println("j: "+Collider.get(j).getTag());
-                if (collisionBoxes.get(i).CollidesWith(collisionBoxes.get(j))) {
-                    //System.out.println(CollisionBoxes.get(i).getTag() + " ist mit " + CollisionBoxes.get(j).getTag() + " kollidiert");
-                    if (collisionBoxes.get(i).getSpieler() != null) {
-                        collisionBoxes.get(i).getSpieler().OnCollision(collisionBoxes.get(j));
+            //Koliisionen überprüfen
+            for (int i = 0; i < CollisionBoxes.size(); i++) {
+                for (int j = i+1; j < CollisionBoxes.size(); j++) {
+                    //System.out.println("i: "+Collider.get(i).getTag());
+                    //System.out.println("j: "+Collider.get(j).getTag());
+                    if(CollisionBoxes.get(i).CollidesWith(CollisionBoxes.get(j))){
+                        //System.out.println(CollisionBoxes.get(i).getTag() + " ist mit " + CollisionBoxes.get(j).getTag() + " kollidiert");
+                        if(CollisionBoxes.get(i).getSpieler() != null){
+                            CollisionBoxes.get(i).getSpieler().OnCollision(CollisionBoxes.get(j));
+                        }
+
+                    }
+                }
+                for (int j = 0; j < CollisionCircles.size(); j++) {
+                    if(CollisionBoxes.get(i).CollidesWith(CollisionCircles.get(j))){
+                        if (CollisionCircles.get(j).getMeinProjektil() != null) {
+                            CollisionCircles.get(j).getMeinProjektil().OnCollision(CollisionBoxes.get(i));
+                        }
+                        if(CollisionBoxes.get(i).getSpieler() != null){
+                            CollisionBoxes.get(i).getSpieler().OnCollision(CollisionCircles.get(j));
+                        }
+                        if(CollisionBoxes.get(i).getmeinGegner() != null){
+                            CollisionBoxes.get(i).getmeinGegner().OnCollision(CollisionCircles.get(j));
+                        }
+
+
+
+
                     }
                 }
             }
-            for (int j = 0; j < collisionCircles.size(); j++) {
-                if (collisionBoxes.get(i).CollidesWith(collisionCircles.get(j))) {
-                    //System.out.println(CollisionBoxes.get(i).getTag() + " ist mit " + CollisionCircles.get(j).getTag() + " kollidiert");
-                    if (collisionBoxes.get(i).getSpieler() != null) {
-                        collisionBoxes.get(i).getSpieler().OnCollision(collisionCircles.get(j));
-                    }
-                    if (collisionCircles.get(j).getMeinProjektil() != null) {
-                        collisionCircles.get(j).getMeinProjektil().OnCollision(collisionBoxes.get(i));
-                    }
-                }
-            }
+
+
+            //Szene malen
+            gui.malen();
         }
-    }
-    public void FrameUpdate(){
-        //Szene malen
-        gui.malen();
-    }
 
-
+    }
     public void ProjektilHinzufügen(Projektil projektil){
-        projektile.add(projektil);
-        collisionCircles.add(projektil.getCollisionCircle());
-        gui.ProjektiilHinzufügen(projektil);
+        Projektile.add(projektil);
+        CollisionCircles.add(projektil.getCollisionCircle());
+        gui.ProjektilHinzufügen(projektil);
     }
-    public void Projektillöschen(Projektil projektil){
-        collisionCircles.remove(projektil.getCollisionCircle());
-        gui.Projektile.remove(projektil);
-        projektile.remove(projektil);
+    public void ProjektilLöschen(Projektil projektil){
+        CollisionCircles.remove(projektil.getCollisionCircle());
+        gui.getProjektile().remove(projektil);
+        Projektile.remove(projektil);
     }
-    public Point2D.Double MoveInDirection(double distanz,double richtung, double steigung, Point2D.Double startpostion){
-        Point2D.Double endposition = new Point2D.Double(0,0);
-        double deltaX = Math.sqrt((Math.pow(distanz, 2) / (1+steigung)));
-        double deltaY = steigung * deltaX;
-        endposition.x = startpostion.x + richtung * deltaX;
-        endposition.y = startpostion.y + deltaY;
-        return  endposition;
+
+    public void WandErstellen(int breite, int hoehe, Color farbe, Point2D.Double position){
+        Wand wand = new Wand(breite, hoehe, farbe, position);
+        Waende.add(wand);
+        CollisionBoxes.add(wand.getCollisionBox());
+        gui.WandHinzufuegen(wand);
+    }
+    public void GegnerErstellen(Point2D.Double position, int breite, int hoehe, int maxLeben, Color farbe){
+        Gegner gegner = new Gegner(position, breite, hoehe, farbe, maxLeben, main);
+        Gegner.add(gegner);
+        CollisionBoxes.add(gegner.getCollisionBox());
+        gui.GegnerHinzufuegen(gegner);
+    }
+
+    public void GegnerLoeschen(Gegner gegner){
+        CollisionBoxes.remove(gegner.getCollisionBox());
+        gui.getGegner().remove(gegner);
+        Gegner.remove(gegner);
     }
 }

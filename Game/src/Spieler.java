@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 
 public class Spieler {
 
@@ -10,6 +9,7 @@ public class Spieler {
     private double geschwindigkeit = 3.5;
     private double maxLeben = 100;
     private double leben = maxLeben;
+    private int punkte;
     private InputController meinInputController;
     private Point2D.Double position = new Point2D.Double(0,0);
     private CollisionBox collisionBox;
@@ -27,7 +27,7 @@ public class Spieler {
         this.hoehe = hoehe;
         this.farbe = farbe;
         this.meinInputController = input;
-        this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null);
+        this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null, null);
         this.main = main;
     }
     public void move(){
@@ -49,8 +49,9 @@ public class Spieler {
         collisionBox.setPosition(position);
     }
 
+
     public void shoot(){
-        Projektil projektil = new Projektil(20, new Point2D.Double(position.x,position.y), Color.RED, 10, main, this, gui);
+        Projektil projektil = new Projektil(20, new Point2D.Double(position.x,position.y), Color.RED, 10, 20, main, this, gui, false);
         projektil.setTarget(MouseInfo.getPointerInfo().getLocation());
         main.ProjektilHinzufügen(projektil);
         System.out.println("SHOOT");
@@ -72,9 +73,20 @@ public class Spieler {
     public void OnCollision(CollisionCircle collider){
         if(collider.getTag().equals("Projektil") && collider.getMeinProjektil().getMeinSpieler() != this){
             System.out.println("mit Projektil kollidiert");
-            leben -= 5;
-            main.Projektillöschen(collider.getMeinProjektil());
+            leben -= collider.getMeinProjektil().getSchaden();
+            main.ProjektilLöschen(collider.getMeinProjektil());
         }
+    }
+
+    public int getPunkte() {
+        return punkte;
+    }
+
+    public void addPunkte(int pluspunkte){
+        this.punkte += pluspunkte;
+    }
+    public void setPunkte(int punkte) {
+        this.punkte = punkte;
     }
 
     public double getLeben() {

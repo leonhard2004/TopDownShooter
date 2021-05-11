@@ -26,9 +26,10 @@ public class GUI {
     BufferedImage bi;
 
     //Liste mit den zu mamlenden Objekten
-    ArrayList<Spieler> zuMalendeSpieler = new ArrayList<Spieler>();
-    ArrayList<Wand> Waende = new ArrayList<Wand>();
-    ArrayList<Projektil> Projektile = new ArrayList<Projektil>();
+    private ArrayList<Spieler> zuMalendeSpieler = new ArrayList<Spieler>();
+    private ArrayList<Gegner> Gegner = new ArrayList<Gegner>();
+    private ArrayList<Wand> Waende = new ArrayList<Wand>();
+    private ArrayList<Projektil> Projektile = new ArrayList<Projektil>();
 
     //Auflösung der Leinwand
     int resX = 0;
@@ -105,10 +106,26 @@ public class GUI {
                     double spielerhöhe = spieler.getHoehe();
                     Rectangle2D rect = new Rectangle2D.Double(spielerposx, spielerposy, spielerbreite, spielerhöhe);
                     g2d.fill(rect);
-                    g2d.setFont( new Font( "Courier New", Font.PLAIN, 12 ) );
+                    g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
                     g2d.setColor( Color.WHITE );
                     g2d.drawString( String.format( "HP: %s", spieler.getLeben() ), (int) spielerposx, (int) spielerposy);
-                    //System.out.println("spieler gemalt"+i);
+
+                }
+            }
+            if (!Gegner.isEmpty()) {
+                for (int i = 0; i < Gegner.size(); i++) {
+                    Gegner gegner = Gegner.get(i);
+                    g2d.setColor(gegner.getFarbe());
+                    double gegnerposx = gegner.getPosition().x;
+                    double gegnerposy = gegner.getPosition().y;
+                    double gegnerbreite = gegner.getBreite();
+                    double gegnerhöhe = gegner.getHoehe();
+                    Rectangle2D rect = new Rectangle2D.Double(gegnerposx, gegnerposy, gegnerbreite, gegnerhöhe);
+                    g2d.fill(rect);
+                    g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
+                    g2d.setColor( Color.WHITE );
+                    g2d.drawString( String.format( "HP: %s", gegner.getLeben() ), (int) gegnerposx, (int) gegnerposy);
+
                 }
             }
             if (!Waende.isEmpty()){
@@ -135,7 +152,7 @@ public class GUI {
                 }
             }
             // display frames per second...
-            g2d.setFont( new Font( "Courier New", Font.PLAIN, 12 ) );
+            g2d.setFont( new Font( "Monospaced", Font.PLAIN, 12 ) );
             g2d.setColor( Color.GREEN );
             g2d.drawString( String.format( "FPS: %s", fps ), 20, 20 );
 
@@ -157,16 +174,37 @@ public class GUI {
         zuMalendeSpieler.add(spieler);
         System.out.println(zuMalendeSpieler);
     }
+    public void GegnerHinzufuegen(Gegner gegner){
+        Gegner.add(gegner);
+        System.out.println(Gegner);
+    }
 
     public void WandHinzufuegen(Wand wand ){
         Waende.add(wand);
         System.out.println(Waende);
     }
 
-    public void ProjektiilHinzufügen(Projektil projektil){
+    public void ProjektilHinzufügen(Projektil projektil){
         Projektile.add(projektil);
         System.out.println(Projektile);
     }
+
+    public ArrayList<Spieler> getZuMalendeSpieler() {
+        return zuMalendeSpieler;
+    }
+
+    public ArrayList<Gegner> getGegner() {
+        return Gegner;
+    }
+
+    public ArrayList<Wand> getWaende() {
+        return Waende;
+    }
+
+    public ArrayList<Projektil> getProjektile() {
+        return Projektile;
+    }
+
     public JFrame getFrame() {
         return frame;
     }

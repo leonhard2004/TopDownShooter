@@ -47,7 +47,6 @@ public class CollisionCircle extends Ellipse2D {
         return radius;
     }
 
-
     @Override
     public double getCenterX(){
         double centerX = position.x + radius;

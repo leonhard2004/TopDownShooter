@@ -13,7 +13,7 @@ public class Wand {
         this.hoehe = hoehe;
         this.farbe = farbe;
         this.position = position;
-        collisionBox = new CollisionBox(this.breite, this.hoehe, this.position, "Wand", null,this);
+        collisionBox = new CollisionBox(this.breite, this.hoehe, this.position, "Wand", null,this, null);
 
     }
 

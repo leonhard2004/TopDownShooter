@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.lang.annotation.Target;
 
 public class Projektil {
     private double radius;
@@ -9,28 +8,34 @@ public class Projektil {
     private CollisionCircle collisionCircle;
     private Color farbe;
     private double geschwindigkeit;
+    private double schaden;
     private GameController main;
     Point target;
     private Spieler meinSpieler;
+    private boolean isGegner;
     private GUI gui;
     double deltaX;
     double deltaY;
     double alpha;
 
-    public Projektil(double radius, Point2D.Double position, Color farbe, double geschwindigkeit, GameController main, Spieler spieler, GUI gui) {
+
+    public Projektil(double radius, Point2D.Double position, Color farbe, double geschwindigkeit,double schaden, GameController main, Spieler spieler, GUI gui, boolean isGegner) {
         this.radius = radius;
         this.position = position;
         this.farbe = farbe;
         this.collisionCircle = new CollisionCircle(position, radius, "Projektil", this);
         this.geschwindigkeit = geschwindigkeit;
+        this.schaden = schaden;
         this.main = main;
         this.target = new Point((int)position.x, (int)position.y);
         this.meinSpieler = spieler;
         this.gui = gui;
-
+        this.isGegner = isGegner;
 
     }
-
+    public boolean isGegner(){
+        return isGegner;
+    }
     public void setTarget(Point moveto){
         this.target = moveto;
         deltaX = this.target.x - this.position.x;
@@ -45,17 +50,25 @@ public class Projektil {
 
         this.position.x += geschwindigkeit * Math.cos(alpha);
         this.position.y += geschwindigkeit * Math.sin(alpha);
-        if(position.x < 0)  main.Projektillöschen(this);
-        if(position.x + collisionCircle.getWidth() > gui.getResX())main.Projektillöschen(this);
-        if(position.y < 0)main.Projektillöschen(this);
-        if(position.y + collisionCircle.getHeight() > gui.getResY())main.Projektillöschen(this);
+        if(position.x < 0)  main.ProjektilLöschen(this);
+        if(position.x + collisionCircle.getWidth() > gui.getResX())main.ProjektilLöschen(this);
+        if(position.y < 0)main.ProjektilLöschen(this);
+        if(position.y + collisionCircle.getHeight() > gui.getResY())main.ProjektilLöschen(this);
         this.collisionCircle.setPosition(this.position);
     }
 
     public void OnCollision(CollisionBox collider){
         if(collider.getTag().equals("Wand")){
-            main.Projektillöschen(this);
+            main.ProjektilLöschen(this);
         }
+    }
+
+    public double getSchaden() {
+        return schaden;
+    }
+
+    public void setSchaden(double schaden) {
+        this.schaden = schaden;
     }
 
     public Color getFarbe() {

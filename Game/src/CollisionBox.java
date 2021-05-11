@@ -8,14 +8,16 @@ public class CollisionBox extends Rectangle2D {
     private Point2D.Double position;
     private Spieler meinSpieler;
     private Wand meineWand;
+    private Gegner meinGegner;
 
-    public CollisionBox(int breite, int hoehe, Point2D.Double position, String tag, Spieler spieler, Wand wand) {
+    public CollisionBox(int breite, int hoehe, Point2D.Double position, String tag, Spieler spieler, Wand wand, Gegner gegner) {
         this.breite = breite;
         this.hoehe = hoehe;
         this.position = position;
         this.tag = tag;
         this.meinSpieler = spieler;
         this.meineWand = wand;
+        this.meinGegner = gegner;
     }
 
     public boolean CollidesWith(CollisionBox collider){
@@ -58,6 +60,9 @@ public class CollisionBox extends Rectangle2D {
     }
     public Wand getMeineWand(){
         return  meineWand;
+    }
+    public Gegner getmeinGegner(){
+        return meinGegner;
     }
 
     @Override
