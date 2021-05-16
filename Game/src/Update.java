@@ -38,7 +38,7 @@ public class Update extends Thread{
                 updateDelta--;
             }
             if (frameDelta >= 1){
-                gameController.FrameUpdate();
+                gameController.getGUI().malen();
                 frames++;
                 frameDelta--;
             }
