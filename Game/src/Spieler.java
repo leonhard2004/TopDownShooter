@@ -6,7 +6,7 @@ public class Spieler {
     private int breite;
     private int  hoehe;
     private Color farbe;
-    private double geschwindigkeit = 3.5;
+    private double geschwindigkeit = 6;
     private double maxLeben = 100;
     private double leben = maxLeben;
     private int punkte;
@@ -51,7 +51,7 @@ public class Spieler {
 
 
     public void shoot(){
-        Projektil projektil = new Projektil(20, new Point2D.Double(position.x,position.y), Color.RED, 10, 20, main, this, gui, false);
+        Projektil projektil = new Projektil(20, new Point2D.Double(position.x,position.y), Color.RED, 20, 20, main, this, gui, false);
         projektil.setTarget(MouseInfo.getPointerInfo().getLocation());
         main.ProjektilHinzufügen(projektil);
         System.out.println("SHOOT");

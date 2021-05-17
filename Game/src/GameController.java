@@ -15,44 +15,37 @@ public class GameController {
     private static ArrayList<Gegner> Gegner = new ArrayList<Gegner>();
     //Liste mit Wänden
     private static ArrayList<Wand> Waende = new ArrayList<Wand>();
-    private static GameController main = new GameController();
-    private static GUI gui = new GUI();
-    public static void main(String[] args) {
+
+    private GameController main = this;
+    private  GUI gui = new GUI();
+    public  void start() {
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();        //Bildschirmgröße holen
         gui.start(dim.width, dim.height);
         //Spieler erstellen
-        InputController spieler1input =  new InputController(gui);
-        Spieler spieler1 = new Spieler(gui,1000,400,60,60, new Color(0, 72, 255),spieler1input, main);
+        InputController spieler1input = new InputController(gui);
+        Spieler spieler1 = new Spieler(gui, 1000, 400, 60, 60, new Color(0, 72, 255), spieler1input, main);
         spieler1input.setMeinSpieler(spieler1);
         gui.SpielerHinzufuegen(spieler1);
         CollisionBoxes.add(spieler1.getCollisionBox());
         SpielerListe.add(spieler1);
 
-        main.WandErstellen(1000, 60, new Color(104, 104, 104), new Point2D.Double(128,600));
-        main.WandErstellen(60, 1000, new Color(104, 104, 104), new Point2D.Double(128,120));
+        main.WandErstellen(1000, 60, new Color(104, 104, 104), new Point2D.Double(128, 600));
+        main.WandErstellen(60, 1000, new Color(104, 104, 104), new Point2D.Double(128, 120));
 
         //Gegner erstellen
-        main.GegnerErstellen(new Point2D.Double(300,300), 40, 40, 100, new Color(255, 132, 0));
+        main.GegnerErstellen(new Point2D.Double(300, 300), 40, 40, 100, new Color(255, 132, 0));
+    }
 
-        //Projektil erstellen
-        //Projektil proj1 = new Projektil(30, new Point2D.Double(500, 500), new Color(255, 0, 0), 5, main);
-        //Projektile.add(proj1);
-        //CollisionCircles.add(proj1.getCollisionCircle());
-        //gui.ProjektiilHinzufügen(proj1);
-        //proj1 = null;
 
-        /*for (int i = 0; i < Collider.size(); i++) {
-            System.out.println(Collider.get(i).getX()+", "+Collider.get(i).getY()+", "+Collider.get(i).getWidth()+", "+Collider.get(i).getHeight()+", "+Collider.get(i).getTag());
+    public void FixedUpdate(){
+        //Spieler bewegen
+        for (int i = 0; i < SpielerListe.size(); i++) {
+            SpielerListe.get(i).move();
         }
-        */
-
-        while(true) {
-            //Spieler bewegen
-            spieler1.move();
-            //Projektil bewegen
-            for (int i = 0; i < Projektile.size(); i++) {
-                Projektile.get(i).move();
+        //Projektil bewegen
+        for (int i = 0; i < Projektile.size(); i++) {
+            Projektile.get(i).move();
             }
             //Koliisionen überprüfen
             for (int i = 0; i < CollisionBoxes.size(); i++) {
@@ -87,11 +80,8 @@ public class GameController {
             }
 
 
-            //Szene malen
-            gui.malen();
-        }
 
-    }
+        }
     public void ProjektilHinzufügen(Projektil projektil){
         Projektile.add(projektil);
         CollisionCircles.add(projektil.getCollisionCircle());
@@ -120,5 +110,8 @@ public class GameController {
         CollisionBoxes.remove(gegner.getCollisionBox());
         gui.getGegner().remove(gegner);
         Gegner.remove(gegner);
+    }
+    public GUI getGUI(){
+        return gui;
     }
 }
