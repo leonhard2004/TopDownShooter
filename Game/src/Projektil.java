@@ -36,8 +36,8 @@ public class Projektil {
     public boolean isGegner(){
         return isGegner;
     }
-    public void setTarget(Point moveto){
-        this.target = moveto;
+    public void setTarget(Point2D.Double moveto){
+        this.target.setLocation(moveto.x, moveto.y);
         deltaX = this.target.x - this.position.x;
         deltaY = this.target.y - this.position.y;
         alpha = Math.atan2(deltaY, deltaX);

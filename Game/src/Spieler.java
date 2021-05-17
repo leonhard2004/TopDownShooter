@@ -16,6 +16,7 @@ public class Spieler {
     private Point2D.Double altePosition = new Point2D.Double(0,0);
     private GUI gui;
     private GameController main;
+    private Waffe meineWaffe = new Waffe(this);
 
 
 
@@ -51,10 +52,8 @@ public class Spieler {
 
 
     public void shoot(){
-        Projektil projektil = new Projektil(20, new Point2D.Double(position.x,position.y), Color.RED, 20, 20, main, this, gui, false);
-        projektil.setTarget(MouseInfo.getPointerInfo().getLocation());
-        main.ProjektilHinzufügen(projektil);
-        System.out.println("SHOOT");
+
+        meineWaffe.shoot(main, position, gui);
     }
 
     public void OnCollision(CollisionBox collider){
@@ -76,6 +75,14 @@ public class Spieler {
             leben -= collider.getMeinProjektil().getSchaden();
             main.ProjektilLöschen(collider.getMeinProjektil());
         }
+    }
+
+    public Waffe getMeineWaffe() {
+        return meineWaffe;
+    }
+
+    public void setMeineWaffe(Waffe meineWaffe) {
+        this.meineWaffe = meineWaffe;
     }
 
     public int getPunkte() {

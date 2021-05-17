@@ -34,11 +34,16 @@ public class GUI {
     //Auflösung der Leinwand
     int resX = 0;
     int resY = 0;
+    //Multiplikatoren für andere Auflösung
+    double resXMultiplikator;
+    double resYMultiplikator;
+
     //Farben
     Color hintergrund = new Color(61, 61, 61);
 
 
     public void start(int resX, int resY){
+
         //Fenster konfigurieren
         frame.setIgnoreRepaint(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +58,7 @@ public class GUI {
         canvas.setIgnoreRepaint(true);
         //Größe mit mitgegeben Variablen einstellen
         canvas.setSize(resX, resY);
+
         this.resX = resX;
         this.resY = resY;
         //canvas zu Frame hinzufügen
@@ -68,6 +74,10 @@ public class GUI {
         buffer = canvas.getBufferStrategy();
         //back-Buffering deklarieren
         bi = gc.createCompatibleImage( resX, resY );
+
+        //Positionen an Bildschirmauflösung anpassen
+        this.resXMultiplikator = 1920 / resX;
+        this.resYMultiplikator = 1080 / resY;
 
     }
     int fps = 0;
@@ -94,16 +104,16 @@ public class GUI {
             g2d = bi.createGraphics();
             //Hintergrund malen
             g2d.setColor( hintergrund );
-            g2d.fillRect( 0, 0, resX, resY );
+            g2d.fillRect( 0, 0, (int)(resX * resXMultiplikator), (int) (resY * resYMultiplikator));
             //sachen malen
             if (!zuMalendeSpieler.isEmpty()) {
                 for (int i = 0; i < zuMalendeSpieler.size(); i++) {
                     Spieler spieler = zuMalendeSpieler.get(i);
                     g2d.setColor(spieler.getFarbe());
-                    double spielerposx = spieler.getPosition().x;
-                    double spielerposy = spieler.getPosition().y;
-                    double spielerbreite = spieler.getBreite();
-                    double spielerhöhe = spieler.getHoehe();
+                    double spielerposx = spieler.getPosition().x * resXMultiplikator;
+                    double spielerposy = spieler.getPosition().y * resYMultiplikator;
+                    double spielerbreite = spieler.getBreite() * resXMultiplikator;
+                    double spielerhöhe = spieler.getHoehe() * resYMultiplikator;
                     Rectangle2D rect = new Rectangle2D.Double(spielerposx, spielerposy, spielerbreite, spielerhöhe);
                     g2d.fill(rect);
                     g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
@@ -116,10 +126,10 @@ public class GUI {
                 for (int i = 0; i < Gegner.size(); i++) {
                     Gegner gegner = Gegner.get(i);
                     g2d.setColor(gegner.getFarbe());
-                    double gegnerposx = gegner.getPosition().x;
-                    double gegnerposy = gegner.getPosition().y;
-                    double gegnerbreite = gegner.getBreite();
-                    double gegnerhöhe = gegner.getHoehe();
+                    double gegnerposx = gegner.getPosition().x * resXMultiplikator;
+                    double gegnerposy = gegner.getPosition().y * resYMultiplikator;
+                    double gegnerbreite = gegner.getBreite() * resXMultiplikator;
+                    double gegnerhöhe = gegner.getHoehe() * resYMultiplikator;
                     Rectangle2D rect = new Rectangle2D.Double(gegnerposx, gegnerposy, gegnerbreite, gegnerhöhe);
                     g2d.fill(rect);
                     g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
@@ -132,10 +142,10 @@ public class GUI {
                 for (int i = 0; i < Waende.size(); i++) {
                     Wand wand = Waende.get(i);
                     g2d.setColor(wand.getFarbe());
-                    double wandposx = wand.getPosition().x;
-                    double wandposy = wand.getPosition().y;
-                    double wandbreite = wand.getBreite();
-                    double wandhoehe = wand.getHoehe();
+                    double wandposx = wand.getPosition().x * resXMultiplikator;
+                    double wandposy = wand.getPosition().y * resYMultiplikator;
+                    double wandbreite = wand.getBreite() * resXMultiplikator;
+                    double wandhoehe = wand.getHoehe() * resYMultiplikator;
                     Rectangle2D wandrect = new Rectangle2D.Double(wandposx, wandposy, wandbreite, wandhoehe);
                     g2d.fill(wandrect);
                 }
@@ -144,9 +154,9 @@ public class GUI {
                 for (int i = 0; i < Projektile.size(); i++) {
                     Projektil projektil = Projektile.get(i);
                     g2d.setColor(projektil.getFarbe());
-                    double projektilposx = projektil.getPosition().x;
-                    double projektilposy = projektil.getPosition().y;
-                    double radius = projektil.getRadius();
+                    double projektilposx = projektil.getPosition().x * resXMultiplikator;
+                    double projektilposy = projektil.getPosition().y * resYMultiplikator;
+                    double radius = projektil.getRadius() * resXMultiplikator;
                     Ellipse2D projektilkreis = new Ellipse2D.Double(projektilposx, projektilposy, radius*2, radius*2);
                     g2d.fill(projektilkreis);
                 }
