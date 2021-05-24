@@ -16,7 +16,7 @@ public class Spieler {
     private Point2D.Double altePosition = new Point2D.Double(0,0);
     private GUI gui;
     private GameController main;
-    private Waffe meineWaffe = new Waffe(this);
+    private Waffe meineWaffe;
 
 
 
@@ -53,7 +53,7 @@ public class Spieler {
 
     public void shoot(){
 
-        meineWaffe.shoot(main, position, gui);
+        meineWaffe.shoot(main, gui, this);
     }
 
     public void OnCollision(CollisionBox collider){
@@ -67,6 +67,9 @@ public class Spieler {
             if(collisionBox.CollidesWith(collider))position.x = altePosition.x;
             //die Collisionbox wieder auf die Position des Spielers zurücksetzen
             collisionBox.setPosition(position);
+        }
+        if(collider.getTag().equals("WaffenPickup")){
+            //TODO: Waffe holen
         }
     }
     public void OnCollision(CollisionCircle collider){

@@ -47,7 +47,6 @@ public class InputController {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == MouseEvent.BUTTON1) {
-                    System.out.println("mouseclick");
                     meinSpieler.shoot();
                 }
             }
@@ -120,13 +119,7 @@ public class InputController {
                 if (richtung.equals(RECHTS)){
                         rechts = pressed;
                 }
-            /*System.out.println("oben: "+ oben);
-            System.out.println("unten: "+ unten);
-            System.out.println("rechts: "+ rechts);
-            System.out.println("links: "+ links);
-            System.out.println("x: "+getxAxis());
-            System.out.println("y: "+getyAxis());
-            */
+
         }
     }
     private class EscapeAction extends AbstractAction{

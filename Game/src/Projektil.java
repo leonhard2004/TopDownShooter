@@ -3,12 +3,14 @@ import java.awt.geom.Point2D;
 
 public class Projektil {
     private double radius;
-    private Point2D.Double position;
+    private Point2D.Double position = new Point2D.Double(0,0);;
     private Point2D.Double altePosition = new Point2D.Double(0,0);
     private CollisionCircle collisionCircle;
     private Color farbe;
     private double geschwindigkeit;
     private double schaden;
+    private double distanz;
+    private double zurückgelegteDistanz;
     private GameController main;
     Point target;
     private Spieler meinSpieler;
@@ -21,7 +23,8 @@ public class Projektil {
 
     public Projektil(double radius, Point2D.Double position, Color farbe, double geschwindigkeit,double schaden, GameController main, Spieler spieler, GUI gui, boolean isGegner) {
         this.radius = radius;
-        this.position = position;
+        this.position.x = position.x - radius;
+        this.position.y = position.y - radius;
         this.farbe = farbe;
         this.collisionCircle = new CollisionCircle(position, radius, "Projektil", this);
         this.geschwindigkeit = geschwindigkeit;
@@ -31,7 +34,8 @@ public class Projektil {
         this.meinSpieler = spieler;
         this.gui = gui;
         this.isGegner = isGegner;
-
+        this.distanz = 0;
+        this.zurückgelegteDistanz = 0;
     }
     public boolean isGegner(){
         return isGegner;
@@ -41,6 +45,12 @@ public class Projektil {
         deltaX = this.target.x - this.position.x;
         deltaY = this.target.y - this.position.y;
         alpha = Math.atan2(deltaY, deltaX);
+    }
+    public void setDistanz(double distanz){
+        this.distanz = distanz;
+    }
+    public void setAlpha(double alpha){
+        this.alpha = alpha;
     }
 
     public void move(){
@@ -55,6 +65,13 @@ public class Projektil {
         if(position.y < 0)main.ProjektilLöschen(this);
         if(position.y + collisionCircle.getHeight() > gui.getResY())main.ProjektilLöschen(this);
         this.collisionCircle.setPosition(this.position);
+
+        zurückgelegteDistanz += Point2D.distance(position.x, position.y, altePosition.x, altePosition.y );
+        if(distanz != 0){
+            if(zurückgelegteDistanz >= distanz){
+                main.ProjektilLöschen(this);
+            }
+        }
     }
 
     public void OnCollision(CollisionBox collider){

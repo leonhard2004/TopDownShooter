@@ -30,6 +30,7 @@ public class GUI {
     private ArrayList<Gegner> Gegner = new ArrayList<Gegner>();
     private ArrayList<Wand> Waende = new ArrayList<Wand>();
     private ArrayList<Projektil> Projektile = new ArrayList<Projektil>();
+    private ArrayList<WaffenPickup> WaffenPickups = new ArrayList<WaffenPickup>();
 
     //Auflösung der Leinwand
     int resX = 0;
@@ -116,9 +117,18 @@ public class GUI {
                     double spielerhöhe = spieler.getHoehe() * resYMultiplikator;
                     Rectangle2D rect = new Rectangle2D.Double(spielerposx, spielerposy, spielerbreite, spielerhöhe);
                     g2d.fill(rect);
+                    //Leben über Spieler schreiben
                     g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
                     g2d.setColor( Color.WHITE );
                     g2d.drawString( String.format( "HP: %s", spieler.getLeben() ), (int) spielerposx, (int) spielerposy);
+                    //Waffentyp in die Ecke schreiben
+                    g2d.setFont( new Font( "Serif", Font.PLAIN, 30 ) );
+                    g2d.setColor( Color.WHITE );
+                    String waffenname = "";
+                    if(spieler.getMeineWaffe() != null){
+                        spieler.getMeineWaffe().getName();
+                    }
+                    g2d.drawString( String.format( "Waffe: %s", waffenname),(int) (1700 * resXMultiplikator), (int) (1000 * resYMultiplikator));
 
                 }
             }
@@ -161,6 +171,18 @@ public class GUI {
                     g2d.fill(projektilkreis);
                 }
             }
+            if (!WaffenPickups.isEmpty()){
+                for (int i = 0; i < WaffenPickups.size(); i++) {
+                    WaffenPickup waffenPickup = WaffenPickups.get(i);
+                    g2d.setColor(waffenPickup.getFarbe());
+                    double waffenpickupposx = waffenPickup.getPosition().x * resXMultiplikator;
+                    double waffenpickupposy = waffenPickup.getPosition().y * resYMultiplikator;
+                    double waffenpickupbreite = waffenPickup.getBreite() * resXMultiplikator;
+                    double waffenpickuphoehe = waffenPickup.getHoehe() * resYMultiplikator;
+                    Rectangle2D rect = new Rectangle2D.Double(waffenpickupposx, waffenpickupposy, waffenpickupbreite, waffenpickuphoehe);
+                    g2d.fill(rect);
+                }
+            }
             // display frames per second...
             g2d.setFont( new Font( "Monospaced", Font.PLAIN, 12 ) );
             g2d.setColor( Color.GREEN );
@@ -194,7 +216,12 @@ public class GUI {
         System.out.println(Waende);
     }
 
-    public void ProjektilHinzufügen(Projektil projektil){
+    public void WaffenPickupHinzufuegen(WaffenPickup waffenPickup){
+        WaffenPickups.add(waffenPickup);
+        System.out.println(WaffenPickups);
+    }
+
+    public void ProjektilHinzufuegen(Projektil projektil){
         Projektile.add(projektil);
         System.out.println(Projektile);
     }
