@@ -6,7 +6,7 @@ public class Spieler {
     private int breite;
     private int  hoehe;
     private Color farbe;
-    private double geschwindigkeit = 6;
+    private double geschwindigkeit = 8;
     private double maxLeben = 100;
     private double leben = maxLeben;
     private int punkte;
@@ -69,7 +69,6 @@ public class Spieler {
             collisionBox.setPosition(position);
         }
         if(collider.getTag().equals("WaffenPickup")){
-            //TODO: Waffe holen
             meineWaffe = collider.getmeinWaffenPickup().getWaffe();
             main.WaffenPickupLoeschen(collider.getmeinWaffenPickup());
         }

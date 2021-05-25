@@ -133,7 +133,12 @@ public class GUI {
                         magazingroeße = spieler.getMeineWaffe().getMagazingröße();
                         geschosseneKugeln = spieler.getMeineWaffe().getGeschosseneKugeln();
                     }
-                    g2d.drawString( String.format( "%d/%d", magazingroeße - geschosseneKugeln, magazingroeße), (int) (1700 * resXMultiplikator), (int) (900 * resYMultiplikator));
+                    if(spieler.getMeineWaffe().getLaednach() == true){
+                        g2d.drawString( String.format("nachladen"), (int) (1700 * resXMultiplikator), (int) (900 * resYMultiplikator));
+                    }
+                    if(spieler.getMeineWaffe().getLaednach() == false){
+                        g2d.drawString( String.format( "%d/%d", magazingroeße - geschosseneKugeln, magazingroeße), (int) (1700 * resXMultiplikator), (int) (900 * resYMultiplikator));
+                    }
                 }
             }
             if (!Gegner.isEmpty()) {

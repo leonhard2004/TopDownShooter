@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
+import java.util.Timer;
 import java.util.TimerTask;
 
 public class Waffe {
@@ -13,11 +14,18 @@ public class Waffe {
     private int magazingröße;
     private int geschosseneKugeln;
     private int spray;
+    private boolean laednach;
 
     public void shoot(GameController main, GUI gui, Spieler schießenderSpieler){}
-    public void nachladen(){}
+    public void nachladen(Waffe waffe){
+        Timer timer = new Timer();
+        NachladeTask task = new NachladeTask();
+        task.setWaffe(waffe);
+        timer.schedule(task, (long) (waffe.getNachladezeit() * 1000));
+    }
 
-
+    public void setLaednach(boolean laednach) {}
+    public boolean getLaednach(){return this.laednach;};
 
     public String getName() {
         return name;
@@ -30,6 +38,8 @@ public class Waffe {
     public int getGeschosseneKugeln(){
         return geschosseneKugeln;
     }
+
+    public void setGeschosseneKugeln(int geschosseneKugeln){ this.geschosseneKugeln = geschosseneKugeln;}
 
     public int getSchaden() {
         return schaden;
@@ -58,7 +68,9 @@ public class Waffe {
         }
         @Override
         public void run() {
-            waffe.nachladen();
+            waffe.setGeschosseneKugeln(0);
+            waffe.setLaednach(false);
+            System.out.println("nachgeladen");
         }
 
     }
