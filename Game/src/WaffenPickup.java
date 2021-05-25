@@ -1,22 +1,40 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Random;
 
-public class Wand {
+public class WaffenPickup {
     private int breite;
     private int  hoehe;
     private Color farbe;
     private Point2D.Double position;
     CollisionBox collisionBox;
+    private Waffe waffe;
 
-    public Wand(int breite, int hoehe, Color farbe, Point2D.Double position) {
+    public WaffenPickup(int breite, int hoehe, Color farbe, Point2D.Double position) {
         this.breite = breite;
         this.hoehe = hoehe;
         this.farbe = farbe;
         this.position = position;
-        collisionBox = new CollisionBox(this.breite, this.hoehe, this.position, "Wand", null,this, null);
+        collisionBox = new CollisionBox(this.breite, this.hoehe, this.position, "WaffenPickup", null,null, null);
 
     }
 
+    public void setrandomWaffe(){
+        Random rnd = new Random();
+        int i = rnd.nextInt(2) + 1;
+        switch (i){
+            case 1 : this.waffe = new Pistole();
+            case 2 : this.waffe = new Shotgun();
+        }
+    }
+
+    public void setWaffe(Waffe waffe){
+        this.waffe = waffe;
+    }
+
+    public Waffe getWaffe(){
+        return waffe;
+    }
 
     public CollisionBox getCollisionBox() {
         return collisionBox;
@@ -37,4 +55,5 @@ public class Wand {
     public Point2D.Double getPosition() {
         return position;
     }
+
 }
