@@ -30,7 +30,7 @@ public class Pistole extends Waffe{
         Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x,position.y), Color.RED, projektilgeschwindigkeit, schaden, main, schießenderSpieler, gui, false);
         projektil.setAlpha(alpha);
         projektil.setDistanz(projektildistanz);
-        main.ProjektilHinzufügen(projektil);
+        main.ProjektilHinzufuegen(projektil);
         System.out.println("SHOOT");
     }
     @Override

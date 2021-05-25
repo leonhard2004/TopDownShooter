@@ -15,17 +15,17 @@ public class WaffenPickup {
         this.hoehe = hoehe;
         this.farbe = farbe;
         this.position = position;
-        collisionBox = new CollisionBox(this.breite, this.hoehe, this.position, "WaffenPickup", null,null, null);
+        collisionBox = new CollisionBox(this.breite, this.hoehe, this.position, "WaffenPickup", null,null, null, this);
 
     }
 
     public void setrandomWaffe(){
         Random rnd = new Random();
-        int i = rnd.nextInt(2) + 1;
-        switch (i){
-            case 1 : this.waffe = new Pistole();
-            case 2 : this.waffe = new Shotgun();
-        }
+        int i = rnd.nextInt(2);
+        if(i == 0)this.waffe = new Pistole();
+        if(i == 1)this.waffe = new Shotgun();
+
+        System.out.println("waffe:"+i);
     }
 
     public void setWaffe(Waffe waffe){

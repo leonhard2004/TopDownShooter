@@ -16,7 +16,7 @@ public class Spieler {
     private Point2D.Double altePosition = new Point2D.Double(0,0);
     private GUI gui;
     private GameController main;
-    private Waffe meineWaffe;
+    private Waffe meineWaffe = new Pistole();
 
 
 
@@ -28,7 +28,7 @@ public class Spieler {
         this.hoehe = hoehe;
         this.farbe = farbe;
         this.meinInputController = input;
-        this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null, null);
+        this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null, null, null);
         this.main = main;
     }
     public void move(){
@@ -70,13 +70,15 @@ public class Spieler {
         }
         if(collider.getTag().equals("WaffenPickup")){
             //TODO: Waffe holen
+            meineWaffe = collider.getmeinWaffenPickup().getWaffe();
+            main.WaffenPickupLoeschen(collider.getmeinWaffenPickup());
         }
     }
     public void OnCollision(CollisionCircle collider){
         if(collider.getTag().equals("Projektil") && collider.getMeinProjektil().getMeinSpieler() != this){
             System.out.println("mit Projektil kollidiert");
             leben -= collider.getMeinProjektil().getSchaden();
-            main.ProjektilLöschen(collider.getMeinProjektil());
+            main.ProjektilLoeschen(collider.getMeinProjektil());
         }
     }
 

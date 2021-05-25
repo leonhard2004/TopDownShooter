@@ -21,14 +21,14 @@ public class Gegner {
         this.maxLeben = maxLeben;
         this.leben = maxLeben;
         this.main = main;
-        this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Gegner", null, null, this);
+        this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Gegner", null, null, this, null);
     }
 
     public void OnCollision(CollisionCircle collider){
         if(collider.getTag().equals("Projektil") && collider.getMeinProjektil().isGegner() == false){
             System.out.println("mit Projektil kollidiert");
             leben -= collider.getMeinProjektil().getSchaden();
-            main.ProjektilLöschen(collider.getMeinProjektil());
+            main.ProjektilLoeschen(collider.getMeinProjektil());
             if(leben <= 0){
                 main.GegnerLoeschen(this);
                 collider.getMeinProjektil().getMeinSpieler().addPunkte(10);

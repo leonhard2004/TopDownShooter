@@ -60,23 +60,23 @@ public class Projektil {
 
         this.position.x += geschwindigkeit * Math.cos(alpha);
         this.position.y += geschwindigkeit * Math.sin(alpha);
-        if(position.x < 0)  main.ProjektilLöschen(this);
-        if(position.x + collisionCircle.getWidth() > gui.getResX())main.ProjektilLöschen(this);
-        if(position.y < 0)main.ProjektilLöschen(this);
-        if(position.y + collisionCircle.getHeight() > gui.getResY())main.ProjektilLöschen(this);
+        if(position.x < 0)  main.ProjektilLoeschen(this);
+        if(position.x + collisionCircle.getWidth() > gui.getResX())main.ProjektilLoeschen(this);
+        if(position.y < 0)main.ProjektilLoeschen(this);
+        if(position.y + collisionCircle.getHeight() > gui.getResY())main.ProjektilLoeschen(this);
         this.collisionCircle.setPosition(this.position);
 
         zurückgelegteDistanz += Point2D.distance(position.x, position.y, altePosition.x, altePosition.y );
         if(distanz != 0){
             if(zurückgelegteDistanz >= distanz){
-                main.ProjektilLöschen(this);
+                main.ProjektilLoeschen(this);
             }
         }
     }
 
     public void OnCollision(CollisionBox collider){
         if(collider.getTag().equals("Wand")){
-            main.ProjektilLöschen(this);
+            main.ProjektilLoeschen(this);
         }
     }
 

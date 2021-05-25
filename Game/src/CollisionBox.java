@@ -9,8 +9,9 @@ public class CollisionBox extends Rectangle2D {
     private Spieler meinSpieler;
     private Wand meineWand;
     private Gegner meinGegner;
+    private WaffenPickup meinWaffenPickup;
 
-    public CollisionBox(int breite, int hoehe, Point2D.Double position, String tag, Spieler spieler, Wand wand, Gegner gegner) {
+    public CollisionBox(int breite, int hoehe, Point2D.Double position, String tag, Spieler spieler, Wand wand, Gegner gegner, WaffenPickup waffenpickup) {
         this.breite = breite;
         this.hoehe = hoehe;
         this.position = position;
@@ -18,6 +19,7 @@ public class CollisionBox extends Rectangle2D {
         this.meinSpieler = spieler;
         this.meineWand = wand;
         this.meinGegner = gegner;
+        this.meinWaffenPickup = waffenpickup;
     }
 
     public boolean CollidesWith(CollisionBox collider){
@@ -63,6 +65,9 @@ public class CollisionBox extends Rectangle2D {
     }
     public Gegner getmeinGegner(){
         return meinGegner;
+    }
+    public WaffenPickup getmeinWaffenPickup(){
+        return meinWaffenPickup;
     }
 
     @Override
