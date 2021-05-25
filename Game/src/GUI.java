@@ -127,7 +127,13 @@ public class GUI {
                         waffenname = spieler.getMeineWaffe().getName();
                     }
                     g2d.drawString( String.format( "Waffe: %s", waffenname),(int) (1700 * resXMultiplikator), (int) (1000 * resYMultiplikator));
-
+                    int magazingroeße = 0;
+                    int geschosseneKugeln = 0;
+                    if(spieler.getMeineWaffe() != null){
+                        magazingroeße = spieler.getMeineWaffe().getMagazingröße();
+                        geschosseneKugeln = spieler.getMeineWaffe().getGeschosseneKugeln();
+                    }
+                    g2d.drawString( String.format( "%d/%d", magazingroeße - geschosseneKugeln, magazingroeße), (int) (1700 * resXMultiplikator), (int) (900 * resYMultiplikator));
                 }
             }
             if (!Gegner.isEmpty()) {
