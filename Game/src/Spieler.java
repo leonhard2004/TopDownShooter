@@ -81,6 +81,10 @@ public class Spieler {
         }
     }
 
+    public InputController getMeinInputController() {
+        return meinInputController;
+    }
+
     public Waffe getMeineWaffe() {
         return meineWaffe;
     }

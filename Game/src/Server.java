@@ -51,10 +51,6 @@ public class Server {
                 while(!clientMessage.equals("bye")){
                     clientMessage=inStream.readUTF();
                     System.out.println("From Client-" +clientNo+ ": Number is :"+clientMessage);
-                    squre = Integer.parseInt(clientMessage) * Integer.parseInt(clientMessage);
-                    serverMessage="From Server to Client-" + clientNo + " Square of " + clientMessage + " is " +squre;
-                    outStream.writeUTF(serverMessage);
-                    outStream.flush();
                 }
                 inStream.close();
                 outStream.close();

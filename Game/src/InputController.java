@@ -5,10 +5,11 @@ import java.awt.event.*;
 public class InputController {
     private GUI gui = null;
     private Spieler meinSpieler = null;
-    public boolean rechts = false;
-    public boolean links = false;
-    public boolean oben = false;
-    public boolean unten = false;
+    private boolean rechts = false;
+    private boolean links = false;
+    private boolean oben = false;
+    private boolean unten = false;
+    private boolean isShooting = false;
     private final String RECHTS = "rechts";
     private final String LINKS = "links";
     private final String OBEN = "oben";
@@ -43,12 +44,25 @@ public class InputController {
         inputManager.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("pressed ESCAPE"), "escape");
         inputManager.getActionMap().put("escape", new EscapeAction());
         //Mausklick
+        //wenn Maus gecklickt wird fängt schießen an
         gui.getCanvas().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == MouseEvent.BUTTON1) {
-                    meinSpieler.shoot();
+                    isShooting = true;
                 }
+
+            }
+
+        });
+        //wenn maustaste losgelassen wird, hört schießen auf
+        gui.getCanvas().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(e.getButton() == MouseEvent.BUTTON1) {
+                    isShooting = false;
+                }
+
             }
         });
 
@@ -78,6 +92,10 @@ public class InputController {
             xAxis = 1;
         }
         return xAxis;
+    }
+
+    public boolean isShooting() {
+        return isShooting;
     }
 
     public GUI getGui() {

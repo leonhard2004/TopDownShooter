@@ -14,10 +14,11 @@ public class Pistole extends Waffe{
     private int geschosseneKugeln = 0;
     private final double spray = 0.04;
     private boolean laednach = false;
+    private boolean kannSchiessen = true;
 
     @Override
     public void shoot(GameController main, GUI gui, Spieler schießenderSpieler){
-        if(laednach == false) {
+        if(laednach == false && kannSchiessen == true) {
             if (geschosseneKugeln < magazingröße) {
                 Random rnd = new Random();
                 Point2D.Double position = new Point2D.Double();
@@ -37,6 +38,7 @@ public class Pistole extends Waffe{
                 main.ProjektilHinzufuegen(projektil);
                 System.out.println("SHOOT");
                 geschosseneKugeln++;
+                kannSchiessen = false;
             }
             if (geschosseneKugeln == magazingröße) {
                 laednach = true;
@@ -45,6 +47,10 @@ public class Pistole extends Waffe{
         }
     }
 
+    @Override
+    public void stopShooting() {
+        kannSchiessen = true;
+    }
 
     @Override
     public void setGeschosseneKugeln(int geschosseneKugeln){ this.geschosseneKugeln = geschosseneKugeln;}

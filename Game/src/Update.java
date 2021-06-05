@@ -24,7 +24,7 @@ public class Update extends Thread{
         int fps = 0;
         int frames = 0;
         long totalTime = 0;
-        gameController.start();
+
 
         while(true){
             long now = System.nanoTime();
