@@ -2,9 +2,11 @@ import java.awt.*;
 
 public class Update extends Thread{
     private GameController gameController;
+    private Client client;
 
-    public Update(GameController gameController) {
+    public Update(GameController gameController, Client client) {
         this.gameController = gameController;
+        this.client = client;
     }
 
     @Override
@@ -33,8 +35,13 @@ public class Update extends Thread{
             frameDelta += (now - lastTime) / frameNs;
             lastTime = now;
             while(updateDelta >= 1){
-
                 gameController.FixedUpdate();
+                try {
+                    client.sendPlayerData();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
                 updateDelta--;
             }
             if (frameDelta >= 1){
