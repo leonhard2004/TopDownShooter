@@ -7,26 +7,29 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Server extends Thread{
-    private GameController main;
-    public Server(GameController main){
-        this.main = main;
+public class Server {
+    private static void handleConnection( Socket client ) throws IOException
+    {
+        Scanner in  = new Scanner( client.getInputStream() );
+        PrintWriter out = new PrintWriter( client.getOutputStream(), true );
+
+        String factor1 = in.nextLine();
+        String factor2 = in.nextLine();
+
+        out.println( new BigInteger(factor1).multiply( new BigInteger(factor2) ) );
     }
 
-    @Override
-    public  void run(){
+    public static void main( String[] args ) throws IOException{
     try{
         ServerSocket server=new ServerSocket(8888);
         int counter=0;
         System.out.println("Server Started ....");
         while(true){
+            counter++;
             Socket serverClient=server.accept();  //server accept the client connection request
             System.out.println(" >> " + "Client No:" + counter + " started!");
-            main.SpielerErstellen();
-            Spieler clientSpieler = main.getPlayer(counter);
             ClientHandler sct = new ClientHandler(serverClient,counter); //send  the request to a separate thread
             sct.start();
-            counter++;
         }
     }catch(Exception e){
         System.out.println(e);
@@ -35,7 +38,7 @@ public class Server extends Thread{
     private static class ClientHandler extends Thread{
         Socket serverClient;
         int clientNo;
-        Spieler spieler;
+        int squre;
         ClientHandler(Socket inSocket,int counter){
             serverClient = inSocket;
             clientNo=counter;
@@ -45,22 +48,9 @@ public class Server extends Thread{
                 DataInputStream inStream = new DataInputStream(serverClient.getInputStream());
                 DataOutputStream outStream = new DataOutputStream(serverClient.getOutputStream());
                 String clientMessage="", serverMessage="";
-                while(!clientMessage.equals("ende")){
+                while(!clientMessage.equals("bye")){
                     clientMessage=inStream.readUTF();
-                    if( !clientMessage.equals("")) {
-                        System.out.println("From Client-" + clientNo + ": " + clientMessage);
-
-                        if (clientMessage.equals("getClientID")) {
-                            outStream.writeInt(clientNo);
-                        }
-                        if (clientMessage.equals("spielerdaten")) {
-                            int xAxis = inStream.read();
-                            int yAxis = inStream.read();
-                            boolean isShooting = inStream.readBoolean();
-                            System.out.println("x: "+xAxis+" y: "+yAxis+" isShooting: "+isShooting);
-                        }
-                    }
-
+                    System.out.println("From Client-" +clientNo+ ": Number is :"+clientMessage);
                 }
                 inStream.close();
                 outStream.close();

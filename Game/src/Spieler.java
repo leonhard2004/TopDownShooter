@@ -10,9 +10,7 @@ public class Spieler {
     private double maxLeben = 100;
     private double leben = maxLeben;
     private int punkte;
-    private int xAxis;
-    private int yAxis;
-    private boolean isShooting;
+    private InputController meinInputController;
     private Point2D.Double position = new Point2D.Double(0,0);
     private CollisionBox collisionBox;
     private Point2D.Double altePosition = new Point2D.Double(0,0);
@@ -22,27 +20,28 @@ public class Spieler {
 
 
 
-    public Spieler(GUI gui, int posX, int posY, int breite, int hoehe, Color farbe, GameController main) {
+    public Spieler(GUI gui, int posX, int posY, int breite, int hoehe, Color farbe, InputController input, GameController main) {
         this.gui = gui;
         this.position.x = posX;
         this.position.y = posY;
         this.breite = breite;
         this.hoehe = hoehe;
         this.farbe = farbe;
-
+        this.meinInputController = input;
         this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null, null, null);
         this.main = main;
     }
     public void move(){
-
-        if (xAxis != 0 && yAxis != 0){
-            xAxis *= Math.sqrt(0.5);
-            yAxis *= Math.sqrt(0.5);
+        double dirx = meinInputController.getxAxis();
+        double diry = meinInputController.getyAxis();
+        if (dirx != 0 && diry != 0){
+            dirx *= Math.sqrt(0.5);
+            diry *= Math.sqrt(0.5);
         }
         altePosition.x = position.x;
         altePosition.y = position.y;
-        position.x = position.x + xAxis * geschwindigkeit;
-        position.y = position.y + yAxis * geschwindigkeit;
+        position.x = position.x + dirx * geschwindigkeit;
+        position.y = position.y + diry * geschwindigkeit;
         if(position.x < 0)  position.x = 0;
         if(position.x + breite > gui.getResX()) position.x = gui.getResX() - breite;
         if(position.y < 0)  position.y = 0;
@@ -50,6 +49,7 @@ public class Spieler {
 
         collisionBox.setPosition(position);
     }
+
 
     public void shoot(){
 
@@ -81,12 +81,12 @@ public class Spieler {
         }
     }
 
-    public Waffe getMeineWaffe() {
-        return meineWaffe;
+    public InputController getMeinInputController() {
+        return meinInputController;
     }
 
-    public boolean isShooting() {
-        return isShooting;
+    public Waffe getMeineWaffe() {
+        return meineWaffe;
     }
 
     public void setMeineWaffe(Waffe meineWaffe) {

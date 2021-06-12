@@ -2,20 +2,36 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    GUI gui;
+    GameController main;
     int clientNr;
+    Spieler meinSpieler;
     Socket socket;
 
+    public Client(GameController main, int clientnr){
+        this.main = main;
+        this.clientNr = clientnr;
+    }
+
+
     public void startClient() {
-        gui = new GUI();
         try{
             socket =new Socket("localhost",8888);
+            DataInputStream inStream=new DataInputStream(socket.getInputStream());
             DataOutputStream outStream=new DataOutputStream(socket.getOutputStream());
-            DataInputStream inStream = new DataInputStream(socket.getInputStream());
-            outStream.writeUTF("getClientID");
-            outStream.flush();
-            clientNr = inStream.readInt();
-            System.out.println("clientNr: "+clientNr);
+            /*BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+            String clientMessage="",serverMessage="";
+            while(!clientMessage.equals("bye")){
+                System.out.println("Enter number :");
+                clientMessage=br.readLine();
+                outStream.writeUTF(clientMessage);
+                outStream.flush();
+                serverMessage=inStream.readUTF();
+                System.out.println(serverMessage);
+            }
+
+            outStream.close();
+            outStream.close();
+            socket.close();*/
         }catch(Exception e){
             System.out.println(e);
         }
@@ -27,16 +43,15 @@ public class Client {
             if(socket == null){
                 socket =new Socket("localhost",8888);
             }
-            InputController input = new InputController(gui);
+            this.meinSpieler = main.getPlayer(clientNr);
+            InputController input = meinSpieler.getMeinInputController();
             int xAxis = input.getxAxis();
             int yAxis = input.getyAxis();
             boolean isShooting = input.isShooting();
             DataOutputStream outStream=new DataOutputStream(socket.getOutputStream());
-            outStream.writeUTF("spielerdaten");
-            outStream.write(xAxis);
-            outStream.write(yAxis);
-            outStream.writeBoolean(isShooting);
-            outStream.flush();
+            outStream.writeUTF(String.valueOf(xAxis));
+            outStream.writeUTF(String.valueOf(yAxis));
+            outStream.writeUTF(String.valueOf(isShooting));
         } catch (IOException e) {
             e.printStackTrace();
         }
