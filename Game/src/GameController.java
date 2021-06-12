@@ -23,15 +23,13 @@ public class GameController {
     private static final ArrayList<WaffenPickup> WaffenPickups = new ArrayList<>();
     //Liste mit zu löschenden WaffenPickups
     private static final ArrayList<WaffenPickup> zuLoeschendeWaffenPickups = new ArrayList<>();
-    private Client client;
 
     private final GameController main = this;
     private final GUI gui = new GUI();
     public  void start() {
+
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();        //Bildschirmgröße holen
         gui.start(dim.width, dim.height);
-        client = new Client(this, 0);
-        client.startClient();
         //Spieler erstellen
         InputController spieler1input = new InputController(gui);
         Spieler spieler1 = new Spieler(gui, 1000, 400, 60, 60, new Color(0, 72, 255), spieler1input, main);
@@ -56,12 +54,6 @@ public class GameController {
         //Spieler bewegen
         for (int i = 0; i < SpielerListe.size(); i++) {
             SpielerListe.get(i).move();
-            if(SpielerListe.get(i).getMeinInputController().isShooting()){
-                SpielerListe.get(i).shoot();
-            }
-            if(SpielerListe.get(i).getMeinInputController().isShooting() == false){
-                SpielerListe.get(i).getMeineWaffe().stopShooting();
-            }
         }
         //Projektil bewegen
         for (int i = 0; i < Projektile.size(); i++) {
@@ -112,12 +104,6 @@ public class GameController {
             gui.getWaffenPickups().remove(waffenPickup);
             WaffenPickups.remove(waffenPickup);
         }
-        try {
-            client.sendPlayerData();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
 
     }
     public void ProjektilHinzufuegen(Projektil projektil){
@@ -159,9 +145,6 @@ public class GameController {
         Gegner.add(gegner);
         CollisionBoxes.add(gegner.getCollisionBox());
         gui.GegnerHinzufuegen(gegner);
-    }
-    public Spieler getPlayer(int Clientnr){
-        return SpielerListe.get(Clientnr);
     }
 
 
