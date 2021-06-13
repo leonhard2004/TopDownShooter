@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>CollisionBox</OriginalElement>
+  <nodes>
+    <node x="928.6816398138611" y="3333.0">Shotgun.Delaytask</node>
+    <node x="384.0000000000001" y="2368.5">Pistole</node>
+    <node x="1513.2282196969697" y="5104.0">Start</node>
+    <node x="883.440422586603" y="548.5">Wand</node>
+    <node x="745.2387370685277" y="3600.0">Shotgun</node>
+    <node x="1231.1635842583055" y="0.0">Projektil</node>
+    <node x="0.0" y="3858.0">Update</node>
+    <node x="512.1083333333335" y="3223.0">Waffe</node>
+    <node x="1513.7282196969697" y="4867.0">MainMenu</node>
+    <node x="1445.1175565129722" y="460.0">CollisionCircle</node>
+    <node x="1280.6032196969697" y="4335.0">GameController</node>
+    <node x="2069.117556512972" y="1965.5">InputController.EscapeAction</node>
+    <node x="1165.4583333333335" y="1800.0">GUI</node>
+    <node x="1014.716342719993" y="2737.0">Spieler</node>
+    <node x="1813.1175565129722" y="1965.5">InputController.MoveAction</node>
+    <node x="807.1083333333335" y="892.0">CollisionBox</node>
+    <node x="2455.6723184177345" y="592.5">GegnerWaffe.NachladeTask</node>
+    <node x="239.0" y="3825.0">WaffenPickup</node>
+    <node x="2703.794034090909" y="1068.5">Gegner.ShootTask</node>
+    <node x="2376.794034090909" y="1024.5">GegnerWaffe</node>
+    <node x="1917.927733962555" y="2335.0">InputController</node>
+    <node x="2360.7778699725914" y="1432.0">Gegner</node>
+    <node x="1651.6032196969697" y="4522.5">MainMenu.ButtonListener</node>
+    <node x="542.8083333333335" y="2891.5">Waffe.NachladeTask</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Shotgun" target="Projektil">
+      <point x="-39.450000000000045" y="-82.5" />
+      <point x="837.2887370685277" y="3550.0" />
+      <point x="796.6083333333335" y="3550.0" />
+      <point x="796.6083333333335" y="390.0" />
+      <point x="1335.4817660764872" y="390.0" />
+      <point x="-150.68181818181824" y="160.0" />
+    </edge>
+    <edge source="GameController" target="CollisionBox">
+      <point x="-99.0" y="-226.0" />
+      <point x="1357.1032196969697" y="4215.0" />
+      <point x="228.5" y="4215.0" />
+      <point x="228.5" y="1362.0" />
+      <point x="820.9520833333335" y="1362.0" />
+      <point x="-207.65625" y="215.0" />
+    </edge>
+    <edge source="WaffenPickup" target="CollisionBox">
+      <point x="-89.81818181818176" y="-105.0" />
+      <point x="272.68181818181824" y="3795.0" />
+      <point x="291.35888097547695" y="3795.0" />
+      <point x="291.35888097547695" y="1382.0" />
+      <point x="876.3270833333335" y="1382.0" />
+      <point x="-152.28125" y="215.0" />
+    </edge>
+    <edge source="Pistole" target="Waffe">
+      <point x="-21.916666666666742" y="82.5" />
+      <point x="493.58333333333337" y="2707.0" />
+      <point x="516.9583333333336" y="2707.0" />
+      <point x="516.9583333333336" y="3203.0" />
+      <point x="524.062878787879" y="3203.0" />
+      <point x="-119.5454545454545" y="-148.5" />
+    </edge>
+    <edge source="Pistole" target="GameController">
+      <point x="-65.75" y="82.5" />
+      <point x="449.7500000000001" y="2717.0" />
+      <point x="501.60833333333346" y="2717.0" />
+      <point x="501.60833333333346" y="4175.0" />
+      <point x="1393.1032196969697" y="4175.0" />
+      <point x="-63.0" y="-226.0" />
+    </edge>
+    <edge source="Gegner.ShootTask" target="Gegner">
+      <point x="0.0" y="38.5" />
+      <point x="2763.794034090909" y="1382.0" />
+      <point x="2632.2778699725914" y="1382.0" />
+      <point x="90.5" y="-149.0" />
+    </edge>
+    <edge source="GameController" target="MainMenu">
+      <point x="131.625" y="226.0" />
+      <point x="0.0" y="-93.5" />
+    </edge>
+    <edge source="InputController.MoveAction" target="InputController">
+      <point x="0.0" y="27.0" />
+      <point x="1931.1175565129722" y="2255.0" />
+      <point x="1991.427733962555" y="2255.0" />
+      <point x="-10.5" y="-116.0" />
+    </edge>
+    <edge source="GUI" target="WaffenPickup">
+      <point x="-121.46875" y="192.5" />
+      <point x="1193.4895833333335" y="2225.0" />
+      <point x="371.05289179083786" y="2225.0" />
+      <point x="371.05289179083786" y="3805.0" />
+      <point x="384.9545454545455" y="3805.0" />
+      <point x="22.454545454545496" y="-105.0" />
+    </edge>
+    <edge source="WaffenPickup" target="Waffe">
+      <point x="67.36363636363626" y="-105.0" />
+      <point x="429.86363636363626" y="3795.0" />
+      <point x="403.76122512417123" y="3795.0" />
+      <point x="403.76122512417123" y="3570.0" />
+      <point x="534.0250000000001" y="3570.0" />
+      <point x="-109.58333333333337" y="148.5" />
+    </edge>
+    <edge source="Gegner" target="CollisionBox">
+      <point x="-168.07142857142844" y="-149.0" />
+      <point x="2373.706441401163" y="1392.0" />
+      <point x="1125.5145833333331" y="1392.0" />
+      <point x="96.90624999999977" y="215.0" />
+    </edge>
+    <edge source="GameController" target="Waffe">
+      <point x="-45.0" y="-226.0" />
+      <point x="1411.1032196969697" y="4155.0" />
+      <point x="648.8802316088819" y="4155.0" />
+      <point x="648.8802316088819" y="3580.0" />
+      <point x="665.5250000000002" y="3580.0" />
+      <point x="21.916666666666742" y="148.5" />
+    </edge>
+    <edge source="GUI" target="Gegner">
+      <point x="132.8888888888889" y="-192.5" />
+      <point x="1447.8472222222222" y="1760.0" />
+      <point x="2421.111203305925" y="1760.0" />
+      <point x="-120.66666666666652" y="149.0" />
+    </edge>
+    <edge source="Projektil" target="GUI">
+      <point x="-34.77272727272725" y="160.0" />
+      <point x="1451.3908569855782" y="440.0" />
+      <point x="1336.6892554272015" y="440.0" />
+      <point x="1336.6892554272015" y="1780.0" />
+      <point x="1348.1805555555557" y="1780.0" />
+      <point x="33.22222222222217" y="-192.5" />
+    </edge>
+    <edge source="GameController" target="Spieler">
+      <point x="9.0" y="-226.0" />
+      <point x="1465.1032196969697" y="4095.0" />
+      <point x="1385.2390699927203" y="4095.0" />
+      <point x="1385.2390699927203" y="3193.0" />
+      <point x="1291.5345245381748" y="3193.0" />
+      <point x="73.81818181818176" y="193.0" />
+    </edge>
+    <edge source="CollisionBox" target="Spieler">
+      <point x="41.53125" y="215.0" />
+      <point x="1070.1395833333336" y="1412.0" />
+      <point x="1067.4003898138612" y="1412.0" />
+      <point x="1067.4003898138612" y="2667.0" />
+      <point x="1121.0496760533263" y="2667.0" />
+      <point x="-96.66666666666674" y="-193.0" />
+    </edge>
+    <edge source="GegnerWaffe" target="GameController">
+      <point x="127.91666666666652" y="82.5" />
+      <point x="2658.2107007575755" y="1352.0" />
+      <point x="2733.2778699725914" y="1352.0" />
+      <point x="2733.2778699725914" y="4285.0" />
+      <point x="1600.1032196969697" y="4285.0" />
+      <point x="144.0" y="-226.0" />
+    </edge>
+    <edge source="Pistole" target="Projektil">
+      <point x="0.0" y="-82.5" />
+      <point x="515.5000000000001" y="370.0" />
+      <point x="1289.118129712851" y="370.0" />
+      <point x="-197.0454545454545" y="160.0" />
+    </edge>
+    <edge source="Shotgun" target="Waffe">
+      <point x="-92.05000000000007" y="-82.5" />
+      <point x="784.6887370685276" y="3570.0" />
+      <point x="753.1916666666667" y="3570.0" />
+      <point x="109.58333333333326" y="148.5" />
+    </edge>
+    <edge source="GUI" target="Wand">
+      <point x="-132.8888888888889" y="-192.5" />
+      <point x="1182.0694444444443" y="1750.0" />
+      <point x="1260.6083333333336" y="1750.0" />
+      <point x="1260.6083333333336" y="862.0" />
+      <point x="1056.840422586603" y="862.0" />
+      <point x="71.40000000000009" y="82.5" />
+    </edge>
+    <edge source="GameController" target="Shotgun">
+      <point x="-36.0" y="-226.0" />
+      <point x="1420.1032196969697" y="4145.0" />
+      <point x="916.0720704018612" y="4145.0" />
+      <point x="916.0720704018612" y="3805.0" />
+      <point x="876.7387370685277" y="3805.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="WaffenPickup" target="Shotgun">
+      <point x="112.27272727272725" y="-105.0" />
+      <point x="474.77272727272725" y="3805.0" />
+      <point x="789.0720704018611" y="3805.0" />
+      <point x="-87.66666666666669" y="82.5" />
+    </edge>
+    <edge source="Shotgun.Delaytask" target="Shotgun">
+      <point x="25.916666666666742" y="38.5" />
+      <point x="1110.0983064805278" y="3580.0" />
+      <point x="995.0887370685277" y="3580.0" />
+      <point x="118.35000000000002" y="-82.5" />
+    </edge>
+    <edge source="GameController" target="Update">
+      <point x="-171.0" y="-226.0" />
+      <point x="1285.1032196969697" y="4295.0" />
+      <point x="75.83333333333348" y="4295.0" />
+      <point x="-15.166666666666515" y="72.0" />
+    </edge>
+    <edge source="MainMenu" target="GameController">
+      <point x="-26.90909090909099" y="-93.5" />
+      <point x="1560.8191287878788" y="4817.0" />
+      <point x="1412.2282196969697" y="4817.0" />
+      <point x="-43.875" y="226.0" />
+    </edge>
+    <edge source="GegnerWaffe.NachladeTask" target="GegnerWaffe">
+      <point x="57.59999999999991" y="38.5" />
+      <point x="2585.2723184177344" y="842.0" />
+      <point x="2661.8654626623374" y="842.0" />
+      <point x="131.57142857142844" y="-82.5" />
+    </edge>
+    <edge source="Gegner" target="Spieler">
+      <point x="-80.44444444444434" y="149.0" />
+      <point x="2461.333425528147" y="1770.0" />
+      <point x="1791.6175565129722" y="1770.0" />
+      <point x="1791.6175565129722" y="2667.0" />
+      <point x="1314.3830093866598" y="2667.0" />
+      <point x="96.66666666666674" y="-193.0" />
+    </edge>
+    <edge source="Gegner" target="Gegner.ShootTask">
+      <point x="38.78571428571422" y="-149.0" />
+      <point x="2580.5635842583056" y="1362.0" />
+      <point x="2715.794034090909" y="1362.0" />
+      <point x="-48.0" y="38.5" />
+    </edge>
+    <edge source="Spieler" target="CollisionBox">
+      <point x="-77.33333333333348" y="-193.0" />
+      <point x="1140.3830093866595" y="2657.0" />
+      <point x="1078.4003898138612" y="2657.0" />
+      <point x="1078.4003898138612" y="1412.0" />
+      <point x="1097.8270833333331" y="1412.0" />
+      <point x="69.21874999999977" y="215.0" />
+    </edge>
+    <edge source="Projektil" target="CollisionCircle">
+      <point x="81.13636363636374" y="160.0" />
+      <point x="1567.2999478946692" y="410.0" />
+      <point x="1717.8175565129723" y="410.0" />
+      <point x="121.20000000000005" y="-171.0" />
+    </edge>
+    <edge source="Gegner" target="GegnerWaffe">
+      <point x="-12.928571428571558" y="-149.0" />
+      <point x="2528.84929854402" y="1342.0" />
+      <point x="2555.8773674242425" y="1342.0" />
+      <point x="25.583333333333485" y="82.5" />
+    </edge>
+    <edge source="Gegner" target="CollisionCircle">
+      <point x="168.07142857142844" y="-149.0" />
+      <point x="2709.84929854402" y="1412.0" />
+      <point x="2834.294034090909" y="1412.0" />
+      <point x="2834.294034090909" y="832.0" />
+      <point x="1710.2425565129722" y="832.0" />
+      <point x="113.625" y="171.0" />
+    </edge>
+    <edge source="Spieler" target="GUI">
+      <point x="-19.333333333333485" y="-193.0" />
+      <point x="1198.3830093866595" y="2607.0" />
+      <point x="1263.9824860786666" y="2607.0" />
+      <point x="1263.9824860786666" y="2305.0" />
+      <point x="1342.9895833333335" y="2305.0" />
+      <point x="28.03125" y="192.5" />
+    </edge>
+    <edge source="Shotgun" target="Shotgun.Delaytask">
+      <point x="39.44999999999999" y="-82.5" />
+      <point x="916.1887370685276" y="3550.0" />
+      <point x="954.5983064805278" y="3550.0" />
+      <point x="-129.58333333333337" y="38.5" />
+    </edge>
+    <edge source="Gegner" target="GameController">
+      <point x="0.0" y="149.0" />
+      <point x="2541.7778699725914" y="1780.0" />
+      <point x="2569.5620009574163" y="1780.0" />
+      <point x="2569.5620009574163" y="4235.0" />
+      <point x="1555.1032196969697" y="4235.0" />
+      <point x="99.0" y="-226.0" />
+    </edge>
+    <edge source="Projektil" target="GameController">
+      <point x="220.22727272727275" y="160.0" />
+      <point x="1706.3908569855782" y="350.0" />
+      <point x="2854.294034090909" y="350.0" />
+      <point x="2854.294034090909" y="4305.0" />
+      <point x="1618.1032196969697" y="4305.0" />
+      <point x="162.0" y="-226.0" />
+    </edge>
+    <edge source="GUI" target="Projektil">
+      <point x="0.0" y="-192.5" />
+      <point x="1314.9583333333335" y="430.0" />
+      <point x="1428.20903880376" y="430.0" />
+      <point x="-57.954545454545496" y="160.0" />
+    </edge>
+    <edge source="Spieler" target="CollisionCircle">
+      <point x="19.333333333333258" y="-193.0" />
+      <point x="1237.0496760533263" y="2627.0" />
+      <point x="1558.7425565129722" y="2627.0" />
+      <point x="-37.875" y="171.0" />
+    </edge>
+    <edge source="Waffe" target="Waffe.NachladeTask">
+      <point x="-47.818181818181756" y="-148.5" />
+      <point x="595.7901515151517" y="3203.0" />
+      <point x="586.0083333333336" y="3203.0" />
+      <point x="-28.799999999999955" y="38.5" />
+    </edge>
+    <edge source="GameController" target="Projektil">
+      <point x="-135.0" y="-226.0" />
+      <point x="1321.1032196969697" y="4255.0" />
+      <point x="192.5" y="4255.0" />
+      <point x="192.5" y="350.0" />
+      <point x="1242.7544933492145" y="350.0" />
+      <point x="-243.409090909091" y="160.0" />
+    </edge>
+    <edge source="Projektil" target="Spieler">
+      <point x="127.5" y="160.0" />
+      <point x="1613.6635842583055" y="390.0" />
+      <point x="1769.6175565129722" y="390.0" />
+      <point x="1769.6175565129722" y="2647.0" />
+      <point x="1275.716342719993" y="2647.0" />
+      <point x="58.0" y="-193.0" />
+    </edge>
+    <edge source="Start" target="MainMenu">
+      <point x="37.25" y="-27.0" />
+      <point x="37.0" y="93.5" />
+    </edge>
+    <edge source="Pistole" target="Spieler">
+      <point x="109.58333333333348" y="82.5" />
+      <point x="625.0833333333336" y="2707.0" />
+      <point x="1043.716342719993" y="2707.0" />
+      <point x="-174.0" y="-193.0" />
+    </edge>
+    <edge source="GameController" target="GUI">
+      <point x="45.0" y="-226.0" />
+      <point x="1501.1032196969697" y="4055.0" />
+      <point x="1471.0167092583056" y="4055.0" />
+      <point x="1471.0167092583056" y="2315.0" />
+      <point x="1380.3645833333335" y="2315.0" />
+      <point x="65.40625" y="192.5" />
+    </edge>
+    <edge source="Shotgun" target="GUI">
+      <point x="-13.150000000000034" y="-82.5" />
+      <point x="863.5887370685277" y="3580.0" />
+      <point x="855.9387370685278" y="3580.0" />
+      <point x="855.9387370685278" y="2255.0" />
+      <point x="1249.5520833333335" y="2255.0" />
+      <point x="-65.40625" y="192.5" />
+    </edge>
+    <edge source="InputController" target="GUI">
+      <point x="-52.5" y="-116.0" />
+      <point x="1949.427733962555" y="2275.0" />
+      <point x="1455.1145833333335" y="2275.0" />
+      <point x="140.15625" y="192.5" />
+    </edge>
+    <edge source="Shotgun" target="GameController">
+      <point x="87.66666666666674" y="82.5" />
+      <point x="964.4054037351945" y="3805.0" />
+      <point x="925.0720704018612" y="3805.0" />
+      <point x="925.0720704018612" y="4135.0" />
+      <point x="1429.1032196969697" y="4135.0" />
+      <point x="-27.0" y="-226.0" />
+    </edge>
+    <edge source="CollisionBox" target="Gegner">
+      <point x="179.96874999999977" y="215.0" />
+      <point x="1208.5770833333331" y="1362.0" />
+      <point x="2451.2778699725914" y="1362.0" />
+      <point x="-90.5" y="-149.0" />
+    </edge>
+    <edge source="GameController" target="CollisionCircle">
+      <point x="90.0" y="-226.0" />
+      <point x="1546.1032196969697" y="4225.0" />
+      <point x="2315.617556512972" y="4225.0" />
+      <point x="2315.617556512972" y="872.0" />
+      <point x="1634.4925565129722" y="872.0" />
+      <point x="37.875" y="171.0" />
+    </edge>
+    <edge source="Wand" target="CollisionBox">
+      <point x="51.0" y="82.5" />
+      <point x="1036.4404225866028" y="872.0" />
+      <point x="1091.8940476190473" y="872.0" />
+      <point x="63.28571428571399" y="-215.0" />
+    </edge>
+    <edge source="Pistole" target="GUI">
+      <point x="87.66666666666674" y="-82.5" />
+      <point x="603.1666666666669" y="2235.0" />
+      <point x="1212.1770833333335" y="2235.0" />
+      <point x="-102.78125" y="192.5" />
+    </edge>
+    <edge source="Update" target="GameController">
+      <point x="75.83333333333348" y="72.0" />
+      <point x="166.83333333333348" y="4265.0" />
+      <point x="1312.1032196969697" y="4265.0" />
+      <point x="-144.0" y="-226.0" />
+    </edge>
+    <edge source="GameController" target="InputController">
+      <point x="72.0" y="-226.0" />
+      <point x="1528.1032196969697" y="4205.0" />
+      <point x="2027.085700757576" y="4205.0" />
+      <point x="2027.085700757576" y="2707.0" />
+      <point x="2043.927733962555" y="2707.0" />
+      <point x="42.0" y="116.0" />
+    </edge>
+    <edge source="Projektil" target="CollisionBox">
+      <point x="-127.5" y="160.0" />
+      <point x="1358.6635842583055" y="400.0" />
+      <point x="1097.9404225866028" y="400.0" />
+      <point x="1097.9404225866028" y="872.0" />
+      <point x="1155.1797619047616" y="872.0" />
+      <point x="126.57142857142821" y="-215.0" />
+    </edge>
+    <edge source="MainMenu" target="MainMenu.ButtonListener">
+      <point x="13.454545454545496" y="-93.5" />
+      <point x="1601.1827651515152" y="4807.0" />
+      <point x="1675.2032196969697" y="4807.0" />
+      <point x="-94.40000000000009" y="38.5" />
+    </edge>
+    <edge source="GegnerWaffe" target="GUI">
+      <point x="-127.91666666666652" y="82.5" />
+      <point x="2402.3773674242425" y="1402.0" />
+      <point x="1347.6892554272015" y="1402.0" />
+      <point x="1347.6892554272015" y="1770.0" />
+      <point x="1381.4027777777778" y="1770.0" />
+      <point x="66.44444444444434" y="-192.5" />
+    </edge>
+    <edge source="CollisionBox" target="WaffenPickup">
+      <point x="-96.90625" y="215.0" />
+      <point x="931.7020833333335" y="1402.0" />
+      <point x="313.35888097547695" y="1402.0" />
+      <point x="313.35888097547695" y="3805.0" />
+      <point x="317.5909090909091" y="3805.0" />
+      <point x="-44.90909090909088" y="-105.0" />
+    </edge>
+    <edge source="GameController" target="Gegner">
+      <point x="135.0" y="-226.0" />
+      <point x="1591.1032196969697" y="4275.0" />
+      <point x="2616.202764249639" y="4275.0" />
+      <point x="2616.202764249639" y="1780.0" />
+      <point x="2702.66675886148" y="1780.0" />
+      <point x="160.8888888888887" y="149.0" />
+    </edge>
+    <edge source="InputController.EscapeAction" target="InputController">
+      <point x="0.0" y="27.0" />
+      <point x="2187.117556512972" y="2305.0" />
+      <point x="2054.427733962555" y="2305.0" />
+      <point x="52.5" y="-116.0" />
+    </edge>
+    <edge source="Spieler" target="GameController">
+      <point x="110.72727272727252" y="193.0" />
+      <point x="1328.4436154472655" y="3183.0" />
+      <point x="1394.2390699927203" y="3183.0" />
+      <point x="1394.2390699927203" y="4085.0" />
+      <point x="1474.1032196969697" y="4085.0" />
+      <point x="18.0" y="-226.0" />
+    </edge>
+    <edge source="MainMenu.ButtonListener" target="MainMenu">
+      <point x="0.0" y="38.5" />
+      <point x="1769.6032196969697" y="4827.0" />
+      <point x="1628.0918560606062" y="4827.0" />
+      <point x="40.36363636363649" y="-93.5" />
+    </edge>
+    <edge source="Waffe" target="Spieler">
+      <point x="71.72727272727275" y="-148.5" />
+      <point x="715.3356060606062" y="3163.0" />
+      <point x="1033.1708881745385" y="3163.0" />
+      <point x="-184.5454545454545" y="193.0" />
+    </edge>
+    <edge source="GameController" target="Wand">
+      <point x="-117.0" y="-226.0" />
+      <point x="1339.1032196969697" y="4235.0" />
+      <point x="210.5" y="4235.0" />
+      <point x="210.5" y="832.0" />
+      <point x="914.0404225866029" y="832.0" />
+      <point x="-71.40000000000009" y="82.5" />
+    </edge>
+    <edge source="WaffenPickup" target="Pistole">
+      <point x="44.90909090909099" y="-105.0" />
+      <point x="407.409090909091" y="3805.0" />
+      <point x="392.76122512417123" y="3805.0" />
+      <point x="392.76122512417123" y="2717.0" />
+      <point x="405.91666666666686" y="2717.0" />
+      <point x="-109.58333333333326" y="82.5" />
+    </edge>
+    <edge source="GUI" target="Spieler">
+      <point x="46.71875" y="192.5" />
+      <point x="1361.6770833333335" y="2315.0" />
+      <point x="1274.9824860786666" y="2315.0" />
+      <point x="1274.9824860786666" y="2617.0" />
+      <point x="1217.716342719993" y="2617.0" />
+      <point x="0.0" y="-193.0" />
+    </edge>
+    <edge source="Spieler" target="InputController">
+      <point x="154.66666666666674" y="-193.0" />
+      <point x="1372.3830093866598" y="2697.0" />
+      <point x="1959.927733962555" y="2697.0" />
+      <point x="-42.0" y="116.0" />
+    </edge>
+    <edge source="Shotgun" target="Spieler">
+      <point x="13.149999999999977" y="-82.5" />
+      <point x="889.8887370685277" y="3540.0" />
+      <point x="918.1816398138611" y="3540.0" />
+      <point x="918.1816398138611" y="3193.0" />
+      <point x="1143.8981609018113" y="3193.0" />
+      <point x="-73.81818181818176" y="193.0" />
+    </edge>
+    <edge source="GegnerWaffe" target="Gegner">
+      <point x="76.75" y="82.5" />
+      <point x="2607.044034090909" y="1352.0" />
+      <point x="2554.706441401163" y="1352.0" />
+      <point x="12.928571428571558" y="-149.0" />
+    </edge>
+    <edge source="InputController" target="Spieler">
+      <point x="14.0" y="116.0" />
+      <point x="2015.927733962555" y="2717.0" />
+      <point x="1411.0496760533263" y="2717.0" />
+      <point x="193.33333333333326" y="-193.0" />
+    </edge>
+    <edge source="CollisionCircle" target="Projektil">
+      <point x="-60.59999999999991" y="-171.0" />
+      <point x="1536.0175565129723" y="440.0" />
+      <point x="1497.7544933492147" y="440.0" />
+      <point x="11.590909090909236" y="160.0" />
+    </edge>
+    <edge source="GegnerWaffe" target="GegnerWaffe.NachladeTask">
+      <point x="0.0" y="-82.5" />
+      <point x="2530.294034090909" y="872.0" />
+      <point x="2498.8723184177343" y="872.0" />
+      <point x="-28.800000000000182" y="38.5" />
+    </edge>
+    <edge source="Shotgun.Delaytask" target="Spieler">
+      <point x="116.625" y="-38.5" />
+      <point x="1200.8066398138612" y="3203.0" />
+      <point x="1217.716342719993" y="3203.0" />
+      <point x="0.0" y="193.0" />
+    </edge>
+    <edge source="MainMenu" target="Update">
+      <point x="-67.27272727272748" y="-93.5" />
+      <point x="1520.4554924242423" y="4847.0" />
+      <point x="81.50644540186113" y="4847.0" />
+      <point x="81.50644540186113" y="4315.0" />
+      <point x="15.166666666666515" y="4315.0" />
+      <point x="-75.83333333333348" y="72.0" />
+    </edge>
+    <edge source="Shotgun.Delaytask" target="GameController">
+      <point x="77.75" y="38.5" />
+      <point x="1161.9316398138612" y="3580.0" />
+      <point x="1265.9455093866598" y="3580.0" />
+      <point x="1265.9455093866598" y="4125.0" />
+      <point x="1438.1032196969697" y="4125.0" />
+      <point x="-18.0" y="-226.0" />
+    </edge>
+    <edge source="CollisionBox" target="Wand">
+      <point x="-126.5714285714289" y="-215.0" />
+      <point x="902.0369047619046" y="862.0" />
+      <point x="975.2404225866031" y="862.0" />
+      <point x="-10.199999999999818" y="82.5" />
+    </edge>
+    <edge source="Spieler" target="Pistole">
+      <point x="-193.33333333333326" y="-193.0" />
+      <point x="1024.3830093866598" y="2717.0" />
+      <point x="581.2500000000001" y="2717.0" />
+      <point x="65.75" y="82.5" />
+    </edge>
+    <edge source="CollisionBox" target="CollisionCircle">
+      <point x="189.85714285714243" y="-215.0" />
+      <point x="1218.4654761904758" y="872.0" />
+      <point x="1482.9925565129722" y="872.0" />
+      <point x="-113.625" y="171.0" />
+    </edge>
+    <edge source="GegnerWaffe" target="Spieler">
+      <point x="-76.75" y="82.5" />
+      <point x="2453.544034090909" y="1412.0" />
+      <point x="1780.6175565129722" y="1412.0" />
+      <point x="1780.6175565129722" y="2657.0" />
+      <point x="1295.0496760533263" y="2657.0" />
+      <point x="77.33333333333326" y="-193.0" />
+    </edge>
+    <edge source="Waffe" target="GameController">
+      <point x="-21.916666666666742" y="148.5" />
+      <point x="621.6916666666667" y="3580.0" />
+      <point x="639.8802316088819" y="3580.0" />
+      <point x="639.8802316088819" y="4165.0" />
+      <point x="1402.1032196969697" y="4165.0" />
+      <point x="-54.0" y="-226.0" />
+    </edge>
+    <edge source="GameController" target="WaffenPickup">
+      <point x="-72.0" y="-226.0" />
+      <point x="1384.1032196969697" y="4185.0" />
+      <point x="444.83333333333326" y="4185.0" />
+      <point x="82.33333333333326" y="105.0" />
+    </edge>
+    <edge source="GegnerWaffe" target="Projektil">
+      <point x="-131.57142857142844" y="-82.5" />
+      <point x="2398.7226055194806" y="872.0" />
+      <point x="2376.605250924972" y="872.0" />
+      <point x="2376.605250924972" y="380.0" />
+      <point x="1636.8454024401237" y="380.0" />
+      <point x="150.68181818181824" y="160.0" />
+    </edge>
+    <edge source="Waffe.NachladeTask" target="Waffe">
+      <point x="57.59999999999991" y="38.5" />
+      <point x="672.4083333333334" y="3203.0" />
+      <point x="667.5174242424245" y="3203.0" />
+      <point x="23.90909090909099" y="-148.5" />
+    </edge>
+    <edge source="Shotgun.Delaytask" target="GUI">
+      <point x="-38.875" y="-38.5" />
+      <point x="1045.3066398138612" y="3143.0" />
+      <point x="948.6538620360833" y="3143.0" />
+      <point x="948.6538620360833" y="2275.0" />
+      <point x="1286.9270833333335" y="2275.0" />
+      <point x="-28.03125" y="192.5" />
+    </edge>
+    <edge source="Spieler" target="Waffe">
+      <point x="-147.63636363636374" y="193.0" />
+      <point x="1070.0799790836293" y="3173.0" />
+      <point x="739.2446969696972" y="3173.0" />
+      <point x="95.63636363636374" y="-148.5" />
+    </edge>
+    <edge source="InputController" target="InputController.MoveAction">
+      <point x="-31.5" y="-116.0" />
+      <point x="1970.427733962555" y="2265.0" />
+      <point x="1852.4508898463055" y="2265.0" />
+      <point x="-78.66666666666669" y="27.0" />
+    </edge>
+    <edge source="Waffe" target="GUI">
+      <point x="47.818181818181756" y="-148.5" />
+      <point x="691.4265151515152" y="3153.0" />
+      <point x="719.7665281544743" y="3153.0" />
+      <point x="719.7665281544743" y="2245.0" />
+      <point x="1230.8645833333335" y="2245.0" />
+      <point x="-84.09375" y="192.5" />
+    </edge>
+    <edge source="InputController" target="InputController.EscapeAction">
+      <point x="31.5" y="-116.0" />
+      <point x="2033.427733962555" y="2295.0" />
+      <point x="2108.4508898463055" y="2295.0" />
+      <point x="-78.66666666666669" y="27.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4807860262008734" x="1591.217414659374" y="4479.231845695702" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
