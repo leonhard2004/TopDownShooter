@@ -3,7 +3,7 @@ import java.awt.geom.Point2D;
 
 public class Projektil {
     private double radius;
-    private Point2D.Double position = new Point2D.Double(0,0);;
+    private Point2D.Double position = new Point2D.Double(0,0);
     private Point2D.Double altePosition = new Point2D.Double(0,0);
     private CollisionCircle collisionCircle;
     private Color farbe;

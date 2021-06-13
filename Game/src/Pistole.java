@@ -26,16 +26,14 @@ public class Pistole extends Waffe{
                 double versatz = rnd.nextDouble() * spray;
                 boolean plus = rnd.nextBoolean();
                 if (!plus) versatz = versatz * -1;
-                System.out.println(versatz);
                 double deltaX = (MouseInfo.getPointerInfo().getLocation().x - projektilradius) - position.x;
                 double deltaY = (MouseInfo.getPointerInfo().getLocation().y - projektilradius) - position.y;
                 double alpha = Math.atan2(deltaY, deltaX);
                 alpha += versatz;
-                Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x, position.y), Color.RED, projektilgeschwindigkeit, schaden, main, schießenderSpieler, gui, false);
+                Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x, position.y), schießenderSpieler.getFarbe(), projektilgeschwindigkeit, schaden, main, schießenderSpieler, gui, false);
                 projektil.setAlpha(alpha);
                 projektil.setDistanz(projektildistanz);
                 main.ProjektilHinzufuegen(projektil);
-                System.out.println("SHOOT");
                 geschosseneKugeln++;
             }
             if (geschosseneKugeln == magazingröße) {

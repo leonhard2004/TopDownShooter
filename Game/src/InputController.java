@@ -126,7 +126,7 @@ public class InputController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gui.getFrame().dispatchEvent(new WindowEvent(gui.getFrame(), WindowEvent.WINDOW_CLOSING));
+            meinSpieler.getMain().spielPausieren();
         }
     }
 

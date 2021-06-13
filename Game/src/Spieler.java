@@ -78,6 +78,9 @@ public class Spieler {
             System.out.println("mit Projektil kollidiert");
             leben -= collider.getMeinProjektil().getSchaden();
             main.ProjektilLoeschen(collider.getMeinProjektil());
+            if(leben <= 0){
+                main.spielerTod();
+            }
         }
     }
 
@@ -100,12 +103,24 @@ public class Spieler {
         this.punkte = punkte;
     }
 
+    public double getMaxLeben() {
+        return maxLeben;
+    }
+
     public double getLeben() {
         return leben;
     }
 
     public Point2D.Double getPosition() {
         return position;
+    }
+
+    public void setPosition(Point2D.Double position) {
+        this.position = position;
+    }
+
+    public void setLeben(double leben) {
+        this.leben = leben;
     }
 
     public CollisionBox getCollisionBox() {
@@ -124,4 +139,7 @@ public class Spieler {
         return farbe;
     }
 
+    public GameController getMain() {
+        return main;
+    }
 }

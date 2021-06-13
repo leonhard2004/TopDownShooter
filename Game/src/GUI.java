@@ -45,7 +45,7 @@ public class GUI {
 
         //Fenster konfigurieren
         frame.setIgnoreRepaint(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setFocusable(true);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
@@ -105,6 +105,24 @@ public class GUI {
             g2d.setColor( hintergrund );
             g2d.fillRect( 0, 0, (int)(resX * resXMultiplikator), (int) (resY * resYMultiplikator));
             //sachen malen
+            if (!WaffenPickups.isEmpty()){
+                for (int i = 0; i < WaffenPickups.size(); i++) {
+                    WaffenPickup waffenPickup = WaffenPickups.get(i);
+                    g2d.setColor(waffenPickup.getFarbe());
+                    double waffenpickupposx = waffenPickup.getPosition().x * resXMultiplikator;
+                    double waffenpickupposy = waffenPickup.getPosition().y * resYMultiplikator;
+                    double waffenpickupbreite = waffenPickup.getBreite() * resXMultiplikator;
+                    double waffenpickuphoehe = waffenPickup.getHoehe() * resYMultiplikator;
+                    Rectangle2D rect = new Rectangle2D.Double(waffenpickupposx, waffenpickupposy, waffenpickupbreite, waffenpickuphoehe);
+                    g2d.fill(rect);
+                    //Waffennamen holen um ihn ins Pickup zu schreiben
+                    String waffenname = waffenPickup.getWaffe().getName();
+                    //Farbe und Font festlegen und Waffennamen ins Pickup schreiben
+                    g2d.setColor(Color.WHITE);
+                    g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
+                    g2d.drawString( String.format( "%s", waffenname),(int) waffenpickupposx, (int) (waffenpickupposy + waffenpickuphoehe/2));
+                }
+            }
             if (!zuMalendeSpieler.isEmpty()) {
                 for (int i = 0; i < zuMalendeSpieler.size(); i++) {
                     Spieler spieler = zuMalendeSpieler.get(i);
@@ -139,6 +157,7 @@ public class GUI {
                     if(spieler.getMeineWaffe().getLaednach() == false){
                         g2d.drawString( String.format( "%d/%d", magazingroeße - geschosseneKugeln, magazingroeße), (int) (1700 * resXMultiplikator), (int) (900 * resYMultiplikator));
                     }
+                    g2d.drawString(String.format("Punkte: %d", spieler.getPunkte()), (int) (1700 * resXMultiplikator), (int) (100 * resYMultiplikator));
                 }
             }
             if (!Gegner.isEmpty()) {
@@ -180,24 +199,7 @@ public class GUI {
                     g2d.fill(projektilkreis);
                 }
             }
-            if (!WaffenPickups.isEmpty()){
-                for (int i = 0; i < WaffenPickups.size(); i++) {
-                    WaffenPickup waffenPickup = WaffenPickups.get(i);
-                    g2d.setColor(waffenPickup.getFarbe());
-                    double waffenpickupposx = waffenPickup.getPosition().x * resXMultiplikator;
-                    double waffenpickupposy = waffenPickup.getPosition().y * resYMultiplikator;
-                    double waffenpickupbreite = waffenPickup.getBreite() * resXMultiplikator;
-                    double waffenpickuphoehe = waffenPickup.getHoehe() * resYMultiplikator;
-                    Rectangle2D rect = new Rectangle2D.Double(waffenpickupposx, waffenpickupposy, waffenpickupbreite, waffenpickuphoehe);
-                    g2d.fill(rect);
-                    //Waffennamen holen um ihn ins Pickup zu schreiben
-                    String waffenname = waffenPickup.getWaffe().getName();
-                    //Farbe und Font festlegen und Waffennamen ins Pickup schreiben
-                    g2d.setColor(Color.WHITE);
-                    g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
-                    g2d.drawString( String.format( "%s", waffenname),(int) waffenpickupposx, (int) (waffenpickupposy + waffenpickuphoehe/2));
-                }
-            }
+
             // display frames per second...
             g2d.setFont( new Font( "Monospaced", Font.PLAIN, 12 ) );
             g2d.setColor( Color.GREEN );
@@ -219,26 +221,21 @@ public class GUI {
     }
     public void SpielerHinzufuegen(Spieler spieler ){
         zuMalendeSpieler.add(spieler);
-        System.out.println(zuMalendeSpieler);
     }
     public void GegnerHinzufuegen(Gegner gegner){
         Gegner.add(gegner);
-        System.out.println(Gegner);
     }
 
     public void WandHinzufuegen(Wand wand ){
         Waende.add(wand);
-        System.out.println(Waende);
     }
 
     public void WaffenPickupHinzufuegen(WaffenPickup waffenPickup){
         WaffenPickups.add(waffenPickup);
-        System.out.println(WaffenPickups);
     }
 
     public void ProjektilHinzufuegen(Projektil projektil){
         Projektile.add(projektil);
-        System.out.println(Projektile);
     }
 
     public ArrayList<Spieler> getZuMalendeSpieler() {
