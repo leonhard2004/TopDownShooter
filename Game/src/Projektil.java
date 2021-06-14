@@ -15,13 +15,12 @@ public class Projektil {
     Point target;
     private Spieler meinSpieler;
     private boolean isGegner;
-    private GUI gui;
     double deltaX;
     double deltaY;
     double alpha;
 
 
-    public Projektil(double radius, Point2D.Double position, Color farbe, double geschwindigkeit,double schaden, GameController main, Spieler spieler, GUI gui, boolean isGegner) {
+    public Projektil(double radius, Point2D.Double position, Color farbe, double geschwindigkeit,double schaden, GameController main, Spieler spieler, boolean isGegner) {
         this.radius = radius;
         this.position.x = position.x - radius;
         this.position.y = position.y - radius;
@@ -32,7 +31,6 @@ public class Projektil {
         this.main = main;
         this.target = new Point((int)position.x, (int)position.y);
         this.meinSpieler = spieler;
-        this.gui = gui;
         this.isGegner = isGegner;
         this.distanz = 0;
         this.zurückgelegteDistanz = 0;
@@ -61,9 +59,9 @@ public class Projektil {
         this.position.x += geschwindigkeit * Math.cos(alpha);
         this.position.y += geschwindigkeit * Math.sin(alpha);
         if(position.x < 0)  main.ProjektilLoeschen(this);
-        if(position.x + collisionCircle.getWidth() > gui.getResX())main.ProjektilLoeschen(this);
+        if(position.x + collisionCircle.getWidth() > 1920)main.ProjektilLoeschen(this);
         if(position.y < 0)main.ProjektilLoeschen(this);
-        if(position.y + collisionCircle.getHeight() > gui.getResY())main.ProjektilLoeschen(this);
+        if(position.y + collisionCircle.getHeight() > 1080)main.ProjektilLoeschen(this);
         this.collisionCircle.setPosition(this.position);
 
         zurückgelegteDistanz += Point2D.distance(position.x, position.y, altePosition.x, altePosition.y );

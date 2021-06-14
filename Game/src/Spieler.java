@@ -16,14 +16,12 @@ public class Spieler {
     private Point2D.Double position = new Point2D.Double(0,0);
     private CollisionBox collisionBox;
     private Point2D.Double altePosition = new Point2D.Double(0,0);
-    private GUI gui;
     private GameController main;
     private Waffe meineWaffe = new Pistole();
 
 
 
-    public Spieler(GUI gui, int posX, int posY, int breite, int hoehe, Color farbe, GameController main) {
-        this.gui = gui;
+    public Spieler(int posX, int posY, int breite, int hoehe, Color farbe, GameController main) {
         this.position.x = posX;
         this.position.y = posY;
         this.breite = breite;
@@ -33,6 +31,17 @@ public class Spieler {
         this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null, null, null);
         this.main = main;
     }
+    public Spieler(int posX, int posY, int breite, int hoehe, Color farbe) {
+        this.position.x = posX;
+        this.position.y = posY;
+        this.breite = breite;
+        this.hoehe = hoehe;
+        this.farbe = farbe;
+    }
+
+    public Spieler(Point2D.Double aDouble, int breite, int hoehe, Color color) {
+    }
+
     public void move(){
 
         if (xAxis != 0 && yAxis != 0){
@@ -44,16 +53,16 @@ public class Spieler {
         position.x = position.x + xAxis * geschwindigkeit;
         position.y = position.y + yAxis * geschwindigkeit;
         if(position.x < 0)  position.x = 0;
-        if(position.x + breite > gui.getResX()) position.x = gui.getResX() - breite;
+        if(position.x + breite > 1920) position.x = 1920 - breite;
         if(position.y < 0)  position.y = 0;
-        if(position.y + hoehe > gui.getResY())  position.y = gui.getResY() - hoehe;
+        if(position.y + hoehe > 1080)  position.y = 1080 - hoehe;
 
         collisionBox.setPosition(position);
     }
 
     public void shoot(){
 
-        meineWaffe.shoot(main, gui, this);
+        meineWaffe.shoot(main,this);
     }
 
     public void OnCollision(CollisionBox collider){

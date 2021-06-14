@@ -16,7 +16,7 @@ public class Waffe {
     private int spray;
     private boolean laednach;
 
-    public void shoot(GameController main, GUI gui, Spieler schießenderSpieler){}
+    public void shoot(GameController main,Spieler schießenderSpieler){}
     public void stopShooting(){}
     public void nachladen(Waffe waffe){
         Timer timer = new Timer();

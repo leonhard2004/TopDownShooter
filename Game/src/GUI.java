@@ -153,7 +153,7 @@ public class GUI {
                     g2d.fill(rect);
                     g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
                     g2d.setColor( Color.WHITE );
-                    g2d.drawString( String.format( "HP: %s", gegner.getLeben() ), (int) gegnerposx, (int) gegnerposy);
+                    g2d.drawString( String.format( "HP: %s", gegner.getLeben()), (int) gegnerposx, (int) gegnerposy);
 
                 }
             }

@@ -23,6 +23,15 @@ public class Gegner {
         this.main = main;
         this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Gegner", null, null, this, null);
     }
+    public Gegner( Point2D.Double position, int breite, int hoehe, Color farbe, int maxLeben) {
+
+        this.position = position;
+        this.breite = breite;
+        this.hoehe = hoehe;
+        this.farbe = farbe;
+        this.maxLeben = maxLeben;
+        this.leben = maxLeben;
+    }
 
     public void OnCollision(CollisionCircle collider){
         if(collider.getTag().equals("Projektil") && collider.getMeinProjektil().isGegner() == false){

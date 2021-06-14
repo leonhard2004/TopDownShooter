@@ -17,7 +17,7 @@ public class Shotgun extends Waffe{
     private boolean laednach = false;
 
     @Override
-    public void shoot(GameController main, GUI gui, Spieler schießenderSpieler){
+    public void shoot(GameController main, Spieler schießenderSpieler){
         if(laednach == false) {
             if (geschosseneKugeln < magazingröße) {
                 for (int i = 0; i < projektilanzahl; i++) {
@@ -28,7 +28,7 @@ public class Shotgun extends Waffe{
                     double deltaX = (MouseInfo.getPointerInfo().getLocation().x - projektilradius) - position.x;
                     double deltaY = (MouseInfo.getPointerInfo().getLocation().y - projektilradius) - position.y;
                     double alpha = Math.atan2(deltaY, deltaX);
-                    Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x, position.y), schießenderSpieler.getFarbe(), projektilgeschwindigkeit, schaden, main, schießenderSpieler, gui, false);
+                    Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x, position.y), schießenderSpieler.getFarbe(), projektilgeschwindigkeit, schaden, main, schießenderSpieler,false);
                     projektil.setAlpha(alpha + (i - projektilanzahl / 2) * spray);
                     projektil.setDistanz(projektildistanz);
                     main.ProjektilHinzufuegen(projektil);

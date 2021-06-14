@@ -10,8 +10,9 @@ public class Start {
         Server server = new Server(gamecontroller);
         server.start();
         gamecontroller.start();
-        update.start();
         client.startClient();
+        update.start();
+
 
     }
 }

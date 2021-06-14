@@ -28,18 +28,17 @@ public class GameController {
     private Client client;
 
     private final GameController main = this;
-    private final GUI gui = new GUI();
+
     public  void start() throws IOException {
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();        //Bildschirmgröße holen
-        gui.start(dim.width, dim.height);
+
         //Wände erstellen
         main.WandErstellen(1000, 60, new Color(104, 104, 104), new Point2D.Double(128, 600));
         main.WandErstellen(60, 1000, new Color(104, 104, 104), new Point2D.Double(128, 120));
         //Gegner erstellen
         main.GegnerErstellen(new Point2D.Double(300, 300), 40, 40, 100, new Color(255, 132, 0));
         //Waffenpickups erstellen
-        WaffenPickupErstellen(60, 60, new Color(39, 108, 5), new Point2D.Double(300, 500), new Pistole());
-        WaffenPickupErstellen(60, 60, new Color(39, 108, 5), new Point2D.Double(500, 500), new Shotgun());
+        WaffenPickupErstellen(60, 60, new Color(39, 108, 5), new Point2D.Double(300, 500), new Shotgun());
+        WaffenPickupErstellen(60, 60, new Color(39, 108, 5), new Point2D.Double(500, 500), new Pistole());
         WaffenPickupErstellen(60, 60, new Color(39, 108, 5), new Point2D.Double(700, 500));
         WaffenPickupErstellen(60, 60, new Color(39, 108, 5), new Point2D.Double(900, 500));
     }
@@ -88,21 +87,21 @@ public class GameController {
         for (int i = 0; i < zuLoeschendeProjektile.size(); i++) {
             Projektil projektil = zuLoeschendeProjektile.get(i);
             CollisionCircles.remove(projektil.getCollisionCircle());
-            gui.getProjektile().remove(projektil);
+            //gui.getProjektile().remove(projektil);
             Projektile.remove(projektil);
         }
         //Genger löschen
         for (int i = 0; i < zuLoeschendeGegner.size(); i++) {
             Gegner gegner = zuLoeschendeGegner.get(i);
             CollisionBoxes.remove(gegner.getCollisionBox());
-            gui.getGegner().remove(gegner);
+            //gui.getGegner().remove(gegner);
             Gegner.remove(gegner);
         }
         //WaffenpickupsLöschen
         for (int i = 0; i < zuLoeschendeWaffenPickups.size(); i++) {
             WaffenPickup waffenPickup = zuLoeschendeWaffenPickups.get(i);
             CollisionBoxes.remove(waffenPickup.getCollisionBox());
-            gui.getWaffenPickups().remove(waffenPickup);
+            //gui.getWaffenPickups().remove(waffenPickup);
             WaffenPickups.remove(waffenPickup);
         }
 
@@ -111,7 +110,7 @@ public class GameController {
     public void ProjektilHinzufuegen(Projektil projektil){
         Projektile.add(projektil);
         CollisionCircles.add(projektil.getCollisionCircle());
-        gui.ProjektilHinzufuegen(projektil);
+        //gui.ProjektilHinzufuegen(projektil);
     }
     public void ProjektilLoeschen(Projektil projektil){
         zuLoeschendeProjektile.add(projektil);
@@ -121,21 +120,21 @@ public class GameController {
         Wand wand = new Wand(breite, hoehe, farbe, position);
         Waende.add(wand);
         CollisionBoxes.add(wand.getCollisionBox());
-        gui.WandHinzufuegen(wand);
+        //gui.WandHinzufuegen(wand);
     }
     public void WaffenPickupErstellen(int breite, int hoehe, Color farbe, Point2D.Double position){
         WaffenPickup waffenPickup = new WaffenPickup(breite, hoehe, farbe, position);
         waffenPickup.setrandomWaffe();
         WaffenPickups.add(waffenPickup);
         CollisionBoxes.add(waffenPickup.getCollisionBox());
-        gui.WaffenPickupHinzufuegen(waffenPickup);
+        //gui.WaffenPickupHinzufuegen(waffenPickup);
     }
     public void WaffenPickupErstellen(int breite, int hoehe, Color farbe, Point2D.Double position, Waffe waffe){
         WaffenPickup waffenPickup = new WaffenPickup(breite, hoehe, farbe, position);
         waffenPickup.setWaffe(waffe);
         WaffenPickups.add(waffenPickup);
         CollisionBoxes.add(waffenPickup.getCollisionBox());
-        gui.WaffenPickupHinzufuegen(waffenPickup);
+        //gui.WaffenPickupHinzufuegen(waffenPickup);
     }
 
     public void WaffenPickupLoeschen(WaffenPickup waffenPickup){
@@ -146,13 +145,13 @@ public class GameController {
         Gegner gegner = new Gegner(position, breite, hoehe, farbe, maxLeben, main);
         Gegner.add(gegner);
         CollisionBoxes.add(gegner.getCollisionBox());
-        gui.GegnerHinzufuegen(gegner);
+        //gui.GegnerHinzufuegen(gegner);
     }
     public void SpielerErstellen(){
-        InputController spieler1input = new InputController(gui);
-        Spieler spieler1 = new Spieler(gui, 1000, 400, 60, 60, new Color(0, 72, 255), main);
-        spieler1input.setMeinSpieler(spieler1);
-        gui.SpielerHinzufuegen(spieler1);
+
+        Spieler spieler1 = new Spieler(1000, 400, 60, 60, new Color(0, 72, 255), main);
+
+        //gui.SpielerHinzufuegen(spieler1);
         CollisionBoxes.add(spieler1.getCollisionBox());
         SpielerListe.add(spieler1);
     }
@@ -160,11 +159,24 @@ public class GameController {
         return SpielerListe.get(Clientnr);
     }
 
+    public  ArrayList<Wand> getWaende() {
+        return Waende;
+    }
+
+    public  ArrayList<Gegner> getGegner() {
+        return Gegner;
+    }
+
+    public  ArrayList<Spieler> getSpielerListe() {
+        return SpielerListe;
+    }
+
+    public  ArrayList<WaffenPickup> getWaffenPickups() {
+        return WaffenPickups;
+    }
 
     public void GegnerLoeschen(Gegner gegner){
         zuLoeschendeGegner.add(gegner);
     }
-    public GUI getGUI(){
-        return gui;
-    }
+
 }

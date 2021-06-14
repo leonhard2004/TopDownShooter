@@ -45,7 +45,7 @@ public class Update extends Thread{
                 updateDelta--;
             }
             if (frameDelta >= 1){
-                gameController.getGUI().malen();
+                client.getGui().malen();
                 frames++;
                 frameDelta--;
             }
