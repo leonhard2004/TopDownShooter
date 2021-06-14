@@ -178,7 +178,7 @@ public class GameController {
 
     public void datenSpeichern(){
         try {
-            FileWriter fileWriter = new FileWriter("D:\\OneDrive - Landrat-Gruber-Schule\\00_TopDownShooter\\data.txt");
+            FileWriter fileWriter = new FileWriter("data.txt");
             BufferedWriter out = new BufferedWriter(fileWriter);
             System.out.println("high: "+highscore);
             int punkte = SpielerListe.get(0).getPunkte();

@@ -26,8 +26,8 @@ public class Pistole extends Waffe{
                 double versatz = rnd.nextDouble() * spray;
                 boolean plus = rnd.nextBoolean();
                 if (!plus) versatz = versatz * -1;
-                double deltaX = (MouseInfo.getPointerInfo().getLocation().x - projektilradius) - position.x;
-                double deltaY = (MouseInfo.getPointerInfo().getLocation().y - projektilradius) - position.y;
+                double deltaX = (MouseInfo.getPointerInfo().getLocation().x + gui.getCurserWidth()/2 ) - position.x;
+                double deltaY = (MouseInfo.getPointerInfo().getLocation().y + gui.getCurserHeight()/2 ) - position.y;
                 double alpha = Math.atan2(deltaY, deltaX);
                 alpha += versatz;
                 Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x, position.y), schießenderSpieler.getFarbe(), projektilgeschwindigkeit, schaden, main, schießenderSpieler, gui, false);

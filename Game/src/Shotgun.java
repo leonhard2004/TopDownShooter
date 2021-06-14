@@ -41,8 +41,8 @@ public class Shotgun extends Waffe{
             Point2D.Double position = new Point2D.Double();
             position.x = schießenderSpieler.getPosition().getX() + (schießenderSpieler.getBreite() / 2);
             position.y = schießenderSpieler.getPosition().getY() + (schießenderSpieler.getHoehe() / 2);
-            double deltaX = (MouseInfo.getPointerInfo().getLocation().x - projektilradius) - position.x;
-            double deltaY = (MouseInfo.getPointerInfo().getLocation().y - projektilradius) - position.y;
+            double deltaX = (MouseInfo.getPointerInfo().getLocation().x + gui.getCurserWidth()/2 - projektilradius) - position.x;
+            double deltaY = (MouseInfo.getPointerInfo().getLocation().y + gui.getCurserHeight()/2 - projektilradius) - position.y;
             double alpha = Math.atan2(deltaY, deltaX);
             Projektil projektil = new Projektil(projektilradius, new Point2D.Double(position.x, position.y), schießenderSpieler.getFarbe(), projektilgeschwindigkeit, schaden, main, schießenderSpieler, gui, false);
             projektil.setAlpha(alpha + (i - projektilanzahl / 2) * spray);

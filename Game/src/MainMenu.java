@@ -1,12 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 public class MainMenu {
     //Fenster erstellen
@@ -71,16 +70,19 @@ public class MainMenu {
         frame.add(exitButton);
         System.out.println("knüpfe hinzugefügt");
 
+
         //Highscore einlesen
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("D:\\OneDrive - Landrat-Gruber-Schule\\00_TopDownShooter\\data.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("data.txt"));
 
             String highscoreString = bufferedReader.readLine();
             bufferedReader.close();
             if(highscoreString == null)highscoreString = "0";
             highscore = Integer.parseInt(highscoreString);
             highscoreLabel = new JLabel("Highscore: "+highscoreString);
-            highscoreLabel.setBounds(1700+insets.left, 100+insets.top, 200, 70);
+            highscoreLabel.setBounds(1500+insets.left, 100+insets.top, 400, 140);
+            Font font = new Font("Test", Font.BOLD, 40);
+            highscoreLabel.setFont(font);
             frame.add(highscoreLabel);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,9 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUI {
@@ -40,7 +43,7 @@ public class GUI {
     //Farben
     Color hintergrund = new Color(61, 61, 61);
 
-
+    BufferedImage cursor = null;
     public void start(int resX, int resY){
 
         //Fenster konfigurieren
@@ -77,6 +80,18 @@ public class GUI {
         //Positionen an Bildschirmauflösung anpassen
         this.resXMultiplikator = 1920 / resX;
         this.resYMultiplikator = 1080 / resY;
+
+        //Cursor zu Ziel ändern
+
+        try {
+            cursor = ImageIO.read(new File("Cursor.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(new Point(cursor.getTileWidth()/2, cursor.getTileHeight()/2));
+        Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursor, new Point(cursor.getTileWidth()/2, cursor.getTileHeight()/2), "customCursor");
+
+        frame.setCursor( customCursor );
 
     }
     int fps = 0;
@@ -271,5 +286,11 @@ public class GUI {
 
     public int getResY() {
         return resY;
+    }
+    public int getCurserWidth(){
+        return cursor.getWidth();
+    }
+    public int getCurserHeight(){
+        return cursor.getHeight();
     }
 }
