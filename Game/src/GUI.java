@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
@@ -148,6 +149,30 @@ public class GUI {
                     double spielerhöhe = spieler.getHoehe() * resYMultiplikator;
                     Rectangle2D rect = new Rectangle2D.Double(spielerposx, spielerposy, spielerbreite, spielerhöhe);
                     g2d.fill(rect);
+                    //Waffe rendern
+                    BufferedImage waffenimage = null;
+                    try {
+                        waffenimage = ImageIO.read(new File(spieler.getMeineWaffe().getName()+".png"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    double waffenposx = spielerposx + spielerbreite/2;
+                    double waffenposy = spielerposy + spielerhöhe/2;
+                    double deltaX = (MouseInfo.getPointerInfo().getLocation().x + getCurserWidth()/2 ) - waffenposx;
+                    double deltaY = (MouseInfo.getPointerInfo().getLocation().y + getCurserHeight()/2 ) - waffenposy;
+                    double alpha = Math.atan2(deltaY, deltaX);
+                    //Make a backup so that we can reset our graphics object after using it.
+                    AffineTransform backup = g2d.getTransform();
+                    //rx is the x coordinate for rotation, ry is the y coordinate for rotation, and angle
+                    //is the angle to rotate the image. If you want to rotate around the center of an image,
+                    //use the image's center x and y coordinates for rx and ry.
+                    AffineTransform a = AffineTransform.getRotateInstance(alpha, waffenposx, waffenposy);
+                    //Set our Graphics2D object to the transform
+                    g2d.setTransform(a);
+                    //Draw our image like normal
+                    g2d.drawImage(waffenimage, (int) waffenposx, (int) waffenposy, null);
+                    //Reset our graphics object so we can draw with it again.
+                    g2d.setTransform(backup);
                     //Leben über Spieler schreiben
                     g2d.setFont( new Font( "Serif", Font.PLAIN, 13 ) );
                     g2d.setColor( Color.WHITE );
