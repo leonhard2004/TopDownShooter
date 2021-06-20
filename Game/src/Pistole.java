@@ -21,8 +21,8 @@ public class Pistole extends Waffe{
             if (geschosseneKugeln < magazingröße) {
                 Random rnd = new Random();
                 Point2D.Double position = new Point2D.Double();
-                position.x = schießenderSpieler.getPosition().getX() + (schießenderSpieler.getBreite() / 2);
-                position.y = schießenderSpieler.getPosition().getY() + (schießenderSpieler.getHoehe() / 2);
+                position.x = schießenderSpieler.getSchussposition().getX() + (schießenderSpieler.getBreite() / 2);
+                position.y = schießenderSpieler.getSchussposition().getY() + (schießenderSpieler.getHoehe() / 2);
                 double versatz = rnd.nextDouble() * spray;
                 boolean plus = rnd.nextBoolean();
                 if (!plus) versatz = versatz * -1;
