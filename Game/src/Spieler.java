@@ -17,6 +17,7 @@ public class Spieler {
     private GUI gui;
     private GameController main;
     private Waffe meineWaffe = new Pistole();
+    private Point2D.Double schussposition;
 
 
 
@@ -30,6 +31,7 @@ public class Spieler {
         this.meinInputController = input;
         this.collisionBox = new CollisionBox(this.breite, this.hoehe, this.position,"Spieler", this, null, null, null);
         this.main = main;
+        this.schussposition = position;
     }
     public void move(){
         double dirx = meinInputController.getxAxis();
@@ -48,6 +50,7 @@ public class Spieler {
         if(position.y + hoehe > gui.getResY())  position.y = gui.getResY() - hoehe;
 
         collisionBox.setPosition(position);
+        this.schussposition = position;
     }
 
 
@@ -82,6 +85,13 @@ public class Spieler {
                 main.spielerTod();
             }
         }
+    }
+    public void setSchussposition(double x, double y){
+        schussposition = new Point2D.Double(x,y);
+    }
+
+    public Point2D.Double getSchussposition() {
+        return schussposition;
     }
 
     public Waffe getMeineWaffe() {

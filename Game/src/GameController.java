@@ -33,6 +33,7 @@ public class GameController {
     private static final ArrayList<WaffenPickup> zuLoeschendeWaffenPickups = new ArrayList<>();
 
     private int highscore;
+    private boolean spielbeendet = false;
 
     private final GameController main = this;
     private final GUI gui = new GUI();
@@ -47,6 +48,7 @@ public class GameController {
     }
     InputController spieler1input = new InputController(gui);
     public void lvl1(int punkte, int leben){
+        spielbeendet = false;
         //Spieler erstellen
 
         Spieler spieler1 = new Spieler(gui, 910, 800, 60, 60, new Color(0, 72, 255), spieler1input, main);
@@ -137,7 +139,7 @@ public class GameController {
             WaffenPickups.remove(waffenPickup);
         }
         //Wenn Level gecleared ist
-        if(Gegner.isEmpty()){
+        if(Gegner.isEmpty() && spielbeendet == false){
             int punkte = SpielerListe.get(0).getPunkte();
             int leben = (int) SpielerListe.get(0).getLeben();
             spielBeenden();
@@ -200,8 +202,9 @@ public class GameController {
         }
     }
     public void spielBeenden(){
-        SpielerListe.clear();
+        spielbeendet = true;
         Gegner.clear();
+        SpielerListe.clear();
         Projektile.clear();
         Waende.clear();
         CollisionBoxes.clear();
@@ -228,10 +231,11 @@ public class GameController {
         int auswahl = JOptionPane.showOptionDialog(gui.getFrame(), "Du bist gestorben", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"neues Spiel starten", "Zurück zum Menü", "Spiel schließen"},"yes");
 
         //neues Spiel
-        if(auswahl == 0 || auswahl == -1){
+        if(auswahl == 0){
             datenSpeichern();
             spielBeenden();
             lvl1(0, -1);
+
         }
         //ZUm Menü zurückkehren
         if(auswahl == 1){
@@ -241,7 +245,7 @@ public class GameController {
             mainMenu.showMenu();
         }
         //spiel verlassen
-        if(auswahl == 2){
+        if(auswahl == 2 || auswahl == -1){
             datenSpeichern();
             spielBeenden();
             gui.getFrame().dispatchEvent(new WindowEvent(gui.getFrame(), WindowEvent.WINDOW_CLOSING));

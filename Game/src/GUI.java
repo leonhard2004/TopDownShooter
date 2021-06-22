@@ -4,11 +4,15 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 public class GUI {
     //Fenster erstellen
@@ -149,6 +153,7 @@ public class GUI {
                     double spielerhöhe = spieler.getHoehe() * resYMultiplikator;
                     Rectangle2D rect = new Rectangle2D.Double(spielerposx, spielerposy, spielerbreite, spielerhöhe);
                     g2d.fill(rect);
+
                     //Waffe rendern
                     BufferedImage waffenimage = null;
                     try {
@@ -156,8 +161,12 @@ public class GUI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    AffineTransform ti = AffineTransform.getScaleInstance((double) 25 / waffenimage.getHeight(), (double) 25 / waffenimage.getHeight() );
+                    ti.translate(0,0);
+                    AffineTransformOp transformOp = new AffineTransformOp(ti, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+                    waffenimage = transformOp.filter(waffenimage, null);
                     double waffenposx = spielerposx + spielerbreite/2;
-                    double waffenposy = spielerposy + spielerhöhe/2;
+                    double waffenposy = spielerposy + spielerhöhe/2 - waffenimage.getHeight()/2;
                     double deltaX = (MouseInfo.getPointerInfo().getLocation().x + getCurserWidth()/2 ) - waffenposx;
                     double deltaY = (MouseInfo.getPointerInfo().getLocation().y + getCurserHeight()/2 ) - waffenposy;
                     double alpha = Math.atan2(deltaY, deltaX);
@@ -166,11 +175,32 @@ public class GUI {
                     //rx is the x coordinate for rotation, ry is the y coordinate for rotation, and angle
                     //is the angle to rotate the image. If you want to rotate around the center of an image,
                     //use the image's center x and y coordinates for rx and ry.
-                    AffineTransform a = AffineTransform.getRotateInstance(alpha, waffenposx, waffenposy);
-                    //Set our Graphics2D object to the transform
-                    g2d.setTransform(a);
-                    //Draw our image like normal
-                    g2d.drawImage(waffenimage, (int) waffenposx, (int) waffenposy, null);
+                    AffineTransform rotateInstance = AffineTransform.getRotateInstance(alpha, waffenposx, (waffenposy + waffenimage.getHeight()/2));
+
+                    if(alpha > 2 || alpha < - 2 ){
+                         BufferedImage waffenimageflipped = new BufferedImage(waffenimage.getWidth(null), waffenimage.getHeight(null), BufferedImage.TRANSLUCENT);
+                         waffenimageflipped.getGraphics().drawImage(waffenimage, 0, 0, null);
+                         waffenimageflipped.getGraphics().dispose();
+                         AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
+                         tx.translate(0, -waffenimage.getHeight());
+                         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+                         waffenimageflipped = op.filter(waffenimageflipped, null);
+                         //Set our Graphics2D object to the transform
+                         g2d.setTransform(rotateInstance);
+                         g2d.drawImage(waffenimageflipped, (int) waffenposx, (int) (waffenposy), null);
+
+
+                    }
+                    else {
+                        //Set our Graphics2D object to the transform
+                        g2d.setTransform(rotateInstance);
+                        //Draw our image like normal
+                        g2d.drawImage(waffenimage, (int) waffenposx, (int) (waffenposy), null);
+                    }
+
+
+
+
                     //Reset our graphics object so we can draw with it again.
                     g2d.setTransform(backup);
                     //Leben über Spieler schreiben
