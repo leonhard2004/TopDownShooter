@@ -185,10 +185,17 @@ public class GameController {
             System.out.println("high: "+highscore);
             int punkte = SpielerListe.get(0).getPunkte();
             System.out.println("p: "+punkte);
-            if(punkte >= highscore){
+            if(punkte > highscore){
                 System.out.println("neuer Highscore!");
                 highscore = punkte;
                 mainMenu.setHighscore(highscore);
+                String highscoreString =Integer.toString(highscore);
+                out.write(highscoreString);
+                out.flush();
+                out.close();
+                System.out.println("printed");
+            }
+            else{
                 String highscoreString =Integer.toString(highscore);
                 out.write(highscoreString);
                 out.flush();
