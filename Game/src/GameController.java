@@ -49,6 +49,10 @@ public class GameController {
     InputController spieler1input = new InputController(gui);
     public void lvl1(int punkte, int leben){
         spielbeendet = false;
+        synchronized (update){
+            System.out.println("WEITER");
+            update.weiter();
+        }
         //Spieler erstellen
 
         Spieler spieler1 = new Spieler(gui, 910, 800, 60, 60, new Color(0, 72, 255), spieler1input, main);
@@ -234,6 +238,12 @@ public class GameController {
         }
     }
     public void spielerTod(){
+        synchronized (update){
+            System.out.println("PAUSIERT");
+            update.pausieren();
+        }
+        gui.getZuMalendeSpieler().remove(0);
+        gui.malen();
 
         int auswahl = JOptionPane.showOptionDialog(gui.getFrame(), "Du bist gestorben", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"neues Spiel starten", "Zurück zum Menü", "Spiel schließen"},"yes");
 
