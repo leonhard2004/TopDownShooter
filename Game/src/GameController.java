@@ -94,7 +94,7 @@ public class GameController {
         for (int i = 0; i < Projektile.size(); i++) {
             Projektile.get(i).move();
         }
-        //Koliisionen überprüfen
+        //Kollisionen überprüfen
         for (int i = 0; i < CollisionBoxes.size(); i++) {
             for (int j = i+1; j < CollisionBoxes.size(); j++) {
                 if(CollisionBoxes.get(i).CollidesWith(CollisionBoxes.get(j))) {
