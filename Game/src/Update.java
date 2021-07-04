@@ -32,9 +32,6 @@ public class Update extends Thread{
 
 
         while(true){
-
-
-
                 long now = System.nanoTime();
                 totalTime += now - lastTime;
                 updateDelta += (now - lastTime) / updateNs;
@@ -45,7 +42,6 @@ public class Update extends Thread{
                         gameController.FixedUpdate();
                     }
                     updateDelta--;
-
                 }
                 if (frameDelta >= 1) {
                     if(!pause) {
@@ -60,8 +56,6 @@ public class Update extends Thread{
                     frames = 0;
                     //System.out.println("FPS: " + fps);
                 }
-
-
         }
     }
     public synchronized void pausieren(){

@@ -49,6 +49,10 @@ public class GameController {
     InputController spieler1input = new InputController(gui);
     public void lvl1(int punkte, int leben){
         spielbeendet = false;
+        synchronized (update){
+            System.out.println("WEITER");
+            update.weiter();
+        }
         //Spieler erstellen
 
         Spieler spieler1 = new Spieler(gui, 910, 800, 60, 60, new Color(0, 72, 255), spieler1input, main);
@@ -90,7 +94,7 @@ public class GameController {
         for (int i = 0; i < Projektile.size(); i++) {
             Projektile.get(i).move();
         }
-        //Koliisionen überprüfen
+        //Kollisionen überprüfen
         for (int i = 0; i < CollisionBoxes.size(); i++) {
             for (int j = i+1; j < CollisionBoxes.size(); j++) {
                 if(CollisionBoxes.get(i).CollidesWith(CollisionBoxes.get(j))) {
@@ -185,10 +189,17 @@ public class GameController {
             System.out.println("high: "+highscore);
             int punkte = SpielerListe.get(0).getPunkte();
             System.out.println("p: "+punkte);
-            if(punkte >= highscore){
+            if(punkte > highscore){
                 System.out.println("neuer Highscore!");
                 highscore = punkte;
                 mainMenu.setHighscore(highscore);
+                String highscoreString =Integer.toString(highscore);
+                out.write(highscoreString);
+                out.flush();
+                out.close();
+                System.out.println("printed");
+            }
+            else{
                 String highscoreString =Integer.toString(highscore);
                 out.write(highscoreString);
                 out.flush();
@@ -227,6 +238,12 @@ public class GameController {
         }
     }
     public void spielerTod(){
+        synchronized (update){
+            System.out.println("PAUSIERT");
+            update.pausieren();
+        }
+        gui.getZuMalendeSpieler().remove(0);
+        gui.malen();
 
         int auswahl = JOptionPane.showOptionDialog(gui.getFrame(), "Du bist gestorben", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"neues Spiel starten", "Zurück zum Menü", "Spiel schließen"},"yes");
 
