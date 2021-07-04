@@ -7,7 +7,7 @@ public class Spieler {
     private int  hoehe;
     private Color farbe;
     private double geschwindigkeit = 8;
-    private double maxLeben = 100;
+    private final double maxLeben = 100;
     private double leben = maxLeben;
     private int punkte;
     private InputController meinInputController;
